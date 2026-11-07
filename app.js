@@ -95,3 +95,21 @@ if(canHover){
 }
 overlay.addEventListener("click",()=>setMenu(false));
 side.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{ if(!canHover) setMenu(false); }));
+
+// Navegación por secciones: solo se ve una sección a la vez, elegida desde el menú
+const SECCIONES = [...document.querySelectorAll("main section")];
+function mostrarSeccion(id){
+  const destino = document.getElementById(id) ? id : "intro";
+  SECCIONES.forEach(s=>s.classList.toggle("activa", s.id===destino));
+  document.querySelectorAll("#side a").forEach(a=>a.classList.toggle("actual", a.getAttribute("href")==="#"+destino));
+  window.scrollTo(0,0);
+}
+side.querySelectorAll("a").forEach(a=>a.addEventListener("click",e=>{
+  e.preventDefault();
+  const id = a.getAttribute("href").slice(1);
+  location.hash = id;
+  mostrarSeccion(id);
+  setMenu(false);
+}));
+window.addEventListener("hashchange",()=>mostrarSeccion(location.hash.slice(1)||"intro"));
+mostrarSeccion(location.hash.slice(1)||"intro");

@@ -90,3 +90,10 @@ tr:last-child td{border-bottom:0}
 .wrap{overflow-x:auto}
 .empty{color:var(--muted);font-size:.92rem}
 footer{text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.04em;padding:32px 24px 48px;border-top:1px solid var(--line)}
+
+/* Una sola sección visible a la vez; se navega desde el menú */
+section{display:none}
+section.activa{display:block;animation:entrar .35s ease}
+@keyframes entrar{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.side a.actual{color:#fff}
+.side a.actual::before{content:"";display:inline-block;width:14px;height:1px;background:var(--side-text);vertical-align:middle;margin-right:10px}
