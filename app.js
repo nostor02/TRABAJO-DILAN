@@ -1,9 +1,16 @@
 const cardsEl = document.getElementById("cards");
 const filtersEl = document.getElementById("filters");
 
+// Si la miniatura no carga, prueba otras direcciones de YouTube antes de rendirse
+function miniFallo(img,id){
+  const alt=[`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,`https://img.youtube.com/vi/${id}/mqdefault.jpg`,`https://i.ytimg.com/vi/${id}/mqdefault.jpg`];
+  const n=+(img.dataset.n||0);
+  if(n<alt.length){img.dataset.n=n+1;img.src=alt[n];}else{img.onerror=null;}
+}
+
 function ytBlock(t){
   const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.sigla+" soldadura español"));
-  return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://i.ytimg.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" loading="lazy"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
+  return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://img.youtube.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" referrerpolicy="no-referrer" onerror="miniFallo(this,'${t.yt}')"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
 }
 
 function renderCard(t){
