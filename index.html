@@ -28,7 +28,7 @@
   <a href="#comparativa">Comparativa</a>
   <a href="#seguridad">Seguridad</a>
 
-  <h2>Filtrar tipos (selección múltiple)</h2>
+  <h2>Filtrar tipos</h2>
   <div id="filters"></div>
   <div class="tools">
     <button class="small" id="selAll">Todos</button>
@@ -41,77 +41,115 @@
 
   <section id="intro">
     <h2 class="sec">Introducción</h2>
-    <div class="card">
-      <p>La <strong>soldadura</strong> es un proceso de unión de materiales, generalmente metálicos, en el que se aporta calor (y a veces presión y material de aporte) hasta lograr la fusión o la unión en estado sólido de las piezas. Se usa en construcción, automotriz, naval, aeroespacial, tuberías y fabricación en general.</p>
+    <p>La <strong>soldadura</strong> une materiales, generalmente metálicos, aportando calor, y a veces presión y material de aporte, hasta lograr la fusión o la unión en estado sólido de las piezas. Se usa en construcción, automotriz, naval, aeroespacial, tuberías y fabricación en general.</p>
+    <div class="stats">
+      <div class="stat"><span class="num">10</span><span>procesos principales</span></div>
+      <div class="stat"><span class="num">2</span><span>familias: fusión y presión</span></div>
+      <div class="stat"><span class="num">3</span><span>niveles de automatización</span></div>
+    </div>
+    <div class="card quiz" id="quiz">
+      <h3>Pon a prueba lo que ya sabes</h3>
+      <div id="quizPreguntas"></div>
+      <p class="quiz-res" id="quizRes"></p>
     </div>
   </section>
 
   <section id="clasificacion">
     <h2 class="sec">Clasificación</h2>
-    <div class="grid2">
-      <div class="card">
-        <h3>Por tipo de unión</h3>
-        <ul>
-          <li><strong>Por fusión:</strong> las piezas se funden en la zona de unión (arco, gas, láser, etc.).</li>
-          <li><strong>Por presión (en estado sólido):</strong> se unen sin llegar a fundir el metal base (resistencia, fricción).</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Por grado de automatización</h3>
-        <ul>
-          <li><strong>Manual:</strong> el operador controla todo el proceso.</li>
-          <li><strong>Semiautomática:</strong> el equipo alimenta el material y el operador guía.</li>
-          <li><strong>Automática / robotizada:</strong> el proceso se controla de forma programada.</li>
-        </ul>
-      </div>
+    <p>Hay dos formas comunes de clasificar la soldadura. Elige una para ver los detalles.</p>
+    <div class="segmentos" role="tablist">
+      <button class="seg activo" data-clas="union">Por tipo de unión</button>
+      <button class="seg" data-clas="auto">Por automatización</button>
     </div>
+    <div class="card" id="clasPanel"></div>
   </section>
 
   <section id="tipos">
     <h2 class="sec">Tipos de soldadura</h2>
-    <p>Marca o desmarca en el menú lateral los tipos que quieras ver. Puedes seleccionar varios a la vez.</p>
+    <p>Busca por nombre o sigla, o marca tipos en el menú lateral para filtrarlos.</p>
+    <input type="search" id="buscar" class="buscar" placeholder="Buscar: MIG, láser, aluminio…" aria-label="Buscar tipo de soldadura">
     <div id="cards"></div>
   </section>
 
   <section id="instrumentos">
     <h2 class="sec">Instrumentos y equipo</h2>
-    <div class="grid2">
-      <div class="card"><h3>Fuentes de energía</h3><ul><li>Transformadores (corriente alterna)</li><li>Rectificadores (corriente continua)</li><li>Inversores (equipos modernos, ligeros y eficientes)</li></ul></div>
-      <div class="card"><h3>Consumibles y accesorios</h3><ul><li>Electrodos revestidos, alambre sólido o tubular</li><li>Gases de protección (argón, CO₂, mezclas)</li><li>Pinza de masa, porta electrodo, antorcha</li><li>Piqueta y cepillo de alambre para escoria</li></ul></div>
-      <div class="card"><h3>Herramientas de medición</h3><ul><li>Calibrador de soldadura (galga)</li><li>Escuadra y flexómetro</li><li>Amperímetro / voltímetro del equipo</li><li>Medidor de flujo de gas</li></ul></div>
-      <div class="card"><h3>Protección personal</h3><ul><li>Careta o casco con filtro adecuado</li><li>Guantes de cuero y ropa ignífuga</li><li>Polainas, botas de seguridad</li><li>Protección respiratoria y ventilación</li></ul></div>
-    </div>
+    <p>Pulsa cada categoría para ver lo que incluye.</p>
+    <details class="acordeon" open>
+      <summary>Fuentes de energía</summary>
+      <ul>
+        <li>Transformadores: corriente alterna, robustos y económicos.</li>
+        <li>Rectificadores: corriente continua, arco más estable.</li>
+        <li>Inversores: equipos modernos, ligeros y eficientes.</li>
+      </ul>
+    </details>
+    <details class="acordeon">
+      <summary>Consumibles y accesorios</summary>
+      <ul>
+        <li>Electrodos revestidos, alambre sólido o tubular.</li>
+        <li>Gases de protección: argón, CO₂ o mezclas.</li>
+        <li>Pinza de masa, porta electrodo y antorcha.</li>
+        <li>Piqueta y cepillo de alambre para retirar la escoria.</li>
+      </ul>
+    </details>
+    <details class="acordeon">
+      <summary>Herramientas de medición</summary>
+      <ul>
+        <li>Calibrador de soldadura (galga) para medir cordones.</li>
+        <li>Escuadra y flexómetro para alinear piezas.</li>
+        <li>Amperímetro y voltímetro del equipo.</li>
+        <li>Medidor de flujo de gas.</li>
+      </ul>
+    </details>
+    <details class="acordeon">
+      <summary>Protección personal</summary>
+      <ul>
+        <li>Careta o casco con filtro adecuado al amperaje.</li>
+        <li>Guantes de cuero y ropa ignífuga.</li>
+        <li>Polainas y botas de seguridad.</li>
+        <li>Protección respiratoria y ventilación.</li>
+      </ul>
+    </details>
   </section>
 
   <section id="esquemas">
-    <h2 class="sec">Esquema general: soldadura por arco</h2>
-    <div class="svgbox">
-      <svg viewBox="0 0 520 260" width="520" height="260" role="img" aria-label="Esquema del circuito de soldadura por arco">
-        <rect x="20" y="40" width="110" height="70" rx="8" fill="#2b6cb0"/>
-        <text x="75" y="80" fill="#fff" font-size="14" text-anchor="middle">Fuente</text>
-        <text x="75" y="98" fill="#fff" font-size="12" text-anchor="middle">de poder</text>
-        <line x1="130" y1="60" x2="300" y2="60" stroke="#e8702a" stroke-width="3"/>
-        <line x1="300" y1="60" x2="300" y2="110" stroke="#e8702a" stroke-width="3"/>
-        <rect x="260" y="110" width="80" height="20" rx="3" fill="#888"/>
-        <text x="300" y="98" font-size="12" text-anchor="middle" fill="currentColor">Electrodo</text>
-        <polygon points="300,130 292,160 308,160" fill="#e8702a"/>
-        <path d="M292 165 Q300 150 308 165" fill="none" stroke="#f6c343" stroke-width="2" stroke-dasharray="3 3"/>
-        <rect x="200" y="172" width="200" height="30" fill="#6b7280"/>
-        <text x="300" y="192" font-size="12" text-anchor="middle" fill="#fff">Pieza de trabajo</text>
-        <line x1="130" y1="200" x2="200" y2="200" stroke="#333" stroke-width="3"/>
-        <line x1="400" y1="200" x2="460" y2="200" stroke="#333" stroke-width="3"/>
-        <line x1="460" y1="200" x2="460" y2="60" stroke="#333" stroke-width="3"/>
-        <text x="300" y="235" font-size="12" text-anchor="middle" fill="currentColor">Pinza de masa conectada a la pieza. El arco cierra el circuito.</text>
-      </svg>
+    <h2 class="sec">Esquemas</h2>
+    <p>Elige un proceso para ver su diagrama.</p>
+    <div class="segmentos" id="esqBotones">
+      <button class="seg activo" data-img="smaw.svg">SMAW</button>
+      <button class="seg" data-img="gmaw.svg">MIG</button>
+      <button class="seg" data-img="gtaw.svg">TIG</button>
+      <button class="seg" data-img="plasma.svg">Plasma</button>
     </div>
-    <p class="empty" style="margin-top:8px">Esquema simplificado. Para un diagrama detallado consulta el manual de tu equipo.</p>
+    <div class="svgbox"><img id="esqImg" src="smaw.svg" alt="Diagrama del proceso seleccionado"></div>
+    <p class="empty" style="margin-top:10px">Diagramas simplificados. Para detalles de tu equipo, consulta su manual.</p>
   </section>
 
   <section id="comparativa">
-    <h2 class="sec">Comparativa rápida</h2>
+    <h2 class="sec">Comparativa</h2>
+    <div class="card">
+      <h3>¿Qué proceso me conviene?</h3>
+      <p class="empty">Responde dos preguntas y te sugerimos un proceso como punto de partida.</p>
+      <div class="grid2">
+        <label class="campo">Material
+          <select id="selMat">
+            <option value="acero">Acero al carbono</option>
+            <option value="inox">Acero inoxidable</option>
+            <option value="aluminio">Aluminio</option>
+            <option value="lamina">Lámina delgada</option>
+          </select>
+        </label>
+        <label class="campo">Lugar de trabajo
+          <select id="selAmb">
+            <option value="taller">Taller o fábrica</option>
+            <option value="campo">Exterior o campo</option>
+          </select>
+        </label>
+      </div>
+      <p class="sugerencia" id="sugerencia"></p>
+    </div>
     <div class="wrap">
       <table>
-        <thead><tr><th>Proceso</th><th>Nivel de dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
+        <thead><tr><th>Proceso</th><th>Dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
         <tbody>
           <tr><td>SMAW</td><td>Baja–media</td><td>Baja</td><td>Bajo</td><td>Campo, construcción, mantenimiento</td></tr>
           <tr><td>GMAW (MIG)</td><td>Media</td><td>Alta</td><td>Medio</td><td>Fabricación, automotriz</td></tr>
@@ -125,17 +163,27 @@
   </section>
 
   <section id="seguridad">
-    <h2 class="sec">Consideraciones de seguridad</h2>
+    <h2 class="sec">Seguridad</h2>
+    <div class="card">
+      <h3>Lista antes de soldar</h3>
+      <p class="empty">Marca cada punto. La lista se reinicia al recargar la página.</p>
+      <div class="progreso"><div id="progBarra"></div></div>
+      <p class="progTexto" id="progTexto"></p>
+      <label class="check"><input type="checkbox" class="chk"> Equipo revisado: cables, pinza y conexiones en buen estado</label>
+      <label class="check"><input type="checkbox" class="chk"> Careta con filtro adecuado y ropa de algodón o cuero</label>
+      <label class="check"><input type="checkbox" class="chk"> Área ventilada o con extracción de humos</label>
+      <label class="check"><input type="checkbox" class="chk"> Materiales inflamables retirados</label>
+      <label class="check"><input type="checkbox" class="chk"> Extintor cerca y al alcance</label>
+      <label class="check"><input type="checkbox" class="chk"> Cilindros de gas asegurados en posición vertical</label>
+    </div>
     <div class="card">
       <ul>
-        <li><strong>Radiación del arco:</strong> usa careta con filtro adecuado al amperaje. La radiación UV e IR daña la vista y la piel.</li>
-        <li><strong>Humos y gases:</strong> trabaja en áreas ventiladas. Algunos recubrimientos y metales (zinc, cromo, plomo) producen humos tóxicos.</li>
-        <li><strong>Riesgo eléctrico:</strong> no toques partes energizadas, mantén la ropa seca y usa aislantes.</li>
-        <li><strong>Incendio:</strong> retira materiales inflamables y ten un extintor cerca.</li>
-        <li><strong>Quemaduras:</strong> las piezas permanecen calientes mucho tiempo después de soldar.</li>
-        <li><strong>Gases comprimidos:</strong> asegura los cilindros en posición vertical y usa reguladores en buen estado.</li>
+        <li><strong>Radiación del arco:</strong> la radiación UV e IR daña la vista y la piel.</li>
+        <li><strong>Humos y gases:</strong> zinc, cromo y plomo producen humos tóxicos.</li>
+        <li><strong>Riesgo eléctrico:</strong> no toques partes energizadas y mantén la ropa seca.</li>
+        <li><strong>Quemaduras:</strong> las piezas siguen calientes mucho tiempo después de soldar.</li>
       </ul>
-      <p class="warn"><strong>Importante:</strong> nunca sueldes recipientes que hayan contenido combustibles o gases sin limpiarlos y purgarlos antes.</p>
+      <p class="warn"><strong>Importante:</strong> nunca sueldes recipientes que hayan contenido combustibles sin limpiarlos y purgarlos antes.</p>
     </div>
   </section>
 

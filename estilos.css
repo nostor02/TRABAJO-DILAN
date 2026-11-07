@@ -97,3 +97,55 @@ section.activa{display:block;animation:entrar .35s ease}
 @keyframes entrar{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .side a.actual{color:#fff}
 .side a.actual::before{content:"";display:inline-block;width:14px;height:1px;background:var(--side-text);vertical-align:middle;margin-right:10px}
+
+/* Introducción */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.stat{border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:4px;font-size:.88rem;color:var(--muted)}
+.stat .num{font-size:1.9rem;font-weight:500;color:var(--text);letter-spacing:-.02em;line-height:1}
+@media (max-width:640px){.stats{grid-template-columns:1fr}}
+.quiz{margin-top:8px}
+.quiz h3{margin-bottom:16px}
+.pregunta{margin-bottom:22px}
+.pregunta p{margin-bottom:10px;font-size:.95rem}
+.opciones{display:flex;flex-wrap:wrap;gap:8px}
+.opcion{font-family:inherit;font-size:.88rem;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+.opcion:hover:not(:disabled){border-color:var(--accent)}
+.opcion:disabled{cursor:default}
+.opcion.ok{border-color:var(--accent);background:var(--accent-soft)}
+.opcion.mal{border-color:var(--warn);color:var(--warn)}
+.feedback{font-size:.88rem;color:var(--muted);min-height:1.2em;margin-top:8px}
+.quiz-res{font-weight:500;margin-top:8px}
+
+/* Segmentos (botones de selección) */
+.segmentos{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:8px 0 20px}
+.seg{font-family:inherit;font-size:.88rem;background:transparent;color:var(--muted);border:0;border-radius:4px;padding:8px 14px;cursor:pointer}
+.seg:hover{color:var(--text)}
+.seg.activo{background:var(--accent);color:var(--surface)}
+
+/* Búsqueda */
+.buscar{width:100%;font-family:inherit;font-size:.95rem;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--text);margin-bottom:24px}
+.buscar:focus{outline:none;border-color:var(--accent)}
+
+/* Instrumentos: acordeón */
+.acordeon{border-bottom:1px solid var(--line)}
+.acordeon:first-of-type{border-top:1px solid var(--line)}
+.acordeon summary{cursor:pointer;padding:18px 4px;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.acordeon summary::-webkit-details-marker{display:none}
+.acordeon summary::after{content:"+";font-size:1.2rem;color:var(--muted);transition:transform .2s}
+.acordeon[open] summary::after{content:"–"}
+.acordeon ul{margin:0 0 18px;padding-left:22px}
+
+/* Esquemas */
+.svgbox img{max-width:100%;height:auto;display:block;margin:0 auto}
+
+/* Comparativa */
+.campo{display:flex;flex-direction:column;gap:6px;font-size:.85rem;color:var(--muted)}
+.campo select{font-family:inherit;font-size:.95rem;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--text)}
+.sugerencia{margin:18px 0 0;padding:14px 16px;background:var(--accent-soft);border-radius:4px;font-size:.95rem;min-height:1em}
+
+/* Seguridad */
+.progreso{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin:4px 0 8px}
+#progBarra{height:100%;width:0;background:var(--accent);transition:width .3s ease}
+.progTexto{font-size:.88rem;color:var(--muted);margin-bottom:18px}
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);cursor:pointer;font-size:.95rem}
+.check input{margin-top:5px;accent-color:var(--accent)}
