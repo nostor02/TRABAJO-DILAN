@@ -1,196 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Tipos de Soldadura</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tipos de Soldadura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-
 <header class="top">
-  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="side">
-    <span></span><span></span><span></span>
-  </button>
-  <h1>Tipos de Soldadura</h1>
+<button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="side"><span></span><span></span><span></span></button>
+<h1>Tipos de Soldadura</h1>
 </header>
-
 <nav class="side" id="side" aria-label="Menú principal">
-  <h2>Secciones</h2>
-  <a href="#intro">Introducción</a>
-  <a href="#clasificacion">Clasificación</a>
-  <a href="#tipos">Tipos de soldadura</a>
-  <a href="#instrumentos">Instrumentos</a>
-  <a href="#esquemas">Esquemas</a>
-  <a href="#comparativa">Comparativa</a>
-  <a href="#seguridad">Seguridad</a>
-
-  <h2>Filtrar tipos</h2>
-  <div id="filters"></div>
-  <div class="tools">
-    <button class="small" id="selAll">Todos</button>
-    <button class="small" id="selNone">Ninguno</button>
-  </div>
+<h2>Secciones</h2>
+<a href="#intro">Introducción</a>
+<a href="#clasificacion">Clasificación</a>
+<a href="#tipos">Tipos de soldadura</a>
+<a href="#instrumentos">Instrumentos</a>
+<a href="#esquemas">Esquemas</a>
+<a href="#comparativa">Comparativa</a>
+<a href="#seguridad">Seguridad</a>
+<a href="#glosario">Glosario</a>
+<h2>Filtrar tipos</h2>
+<div id="filters"></div>
+<div class="tools"><button class="small" id="selAll">Todos</button><button class="small" id="selNone">Ninguno</button></div>
 </nav>
 <div class="overlay" id="overlay"></div>
-
 <main>
 
-  <section id="intro">
-    <h2 class="sec">Introducción</h2>
-    <p>La <strong>soldadura</strong> une materiales, generalmente metálicos, aportando calor, y a veces presión y material de aporte, hasta lograr la fusión o la unión en estado sólido de las piezas. Se usa en construcción, automotriz, naval, aeroespacial, tuberías y fabricación en general.</p>
-    <div class="stats">
-      <div class="stat"><span class="num">10</span><span>procesos principales</span></div>
-      <div class="stat"><span class="num">2</span><span>familias: fusión y presión</span></div>
-      <div class="stat"><span class="num">3</span><span>niveles de automatización</span></div>
-    </div>
-    <div class="card quiz" id="quiz">
-      <h3>Pon a prueba lo que ya sabes</h3>
-      <div id="quizPreguntas"></div>
-      <p class="quiz-res" id="quizRes"></p>
-    </div>
-  </section>
+<section id="intro">
+<h2 class="sec">Introducción</h2>
+<p class="lead">La soldadura une de forma permanente dos o más piezas, normalmente metálicas, mediante calor, presión o ambos, con o sin material de aporte. Bien hecha, la unión resiste tanto como las piezas que une.</p>
+<h3 class="sub">Qué necesita toda soldadura</h3>
+<div class="tri">
+<div class="card"><h3>1. Fuente de energía</h3><p>Calienta el metal hasta fundirlo o ablandarlo: arco eléctrico, llama, corriente por resistencia, láser o fricción.</p></div>
+<div class="card"><h3>2. Protección</h3><p>A alta temperatura el metal reacciona con el oxígeno y el nitrógeno del aire y queda poroso y frágil. Se evita con gas, escoria o fundente.</p></div>
+<div class="card"><h3>3. Material de aporte</h3><p>Electrodo, alambre o varilla que rellena la unión. Algunos procesos no lo usan, como la resistencia por puntos o la fricción-agitación.</p></div>
+</div>
+<h3 class="sub">Cronología</h3>
+<ul class="timeline">
+<li><span>~1800</span>Humphry Davy demuestra el arco eléctrico, base de toda la soldadura por arco.</li>
+<li><span>1881</span>Auguste de Méritens une placas de plomo con un arco de carbón. En 1885 Benardos y Olszewski patentan el proceso.</li>
+<li><span>1903</span>Fouché y Picard desarrollan el soplete oxiacetilénico.</li>
+<li><span>1904</span>Oscar Kjellberg inventa el electrodo revestido.</li>
+<li><span>1930s</span>Aparece el arco sumergido (SAW) para fabricar piezas grandes y gruesas.</li>
+<li><span>1941</span>Se desarrolla el TIG para soldar aluminio y magnesio en la industria aeronáutica.</li>
+<li><span>1948</span>Nace el MIG, con alambre continuo y gas protector.</li>
+<li><span>1991</span>El instituto TWI (Reino Unido) inventa la fricción-agitación.</li>
+</ul>
+<p class="empty">Las fechas son aproximadas y pueden variar según la fuente.</p>
+<h3 class="sub">Dónde se usa</h3>
+<div class="chips"><span>Automotriz</span><span>Naval</span><span>Construcción y puentes</span><span>Oleoductos y gasoductos</span><span>Aeroespacial</span><span>Electrónica</span><span>Energía</span><span>Maquinaria</span></div>
+<div class="card quiz" id="quiz" style="margin-top:36px"><h3>Evalúa lo aprendido</h3><div id="quizPreguntas"></div><p class="quiz-res" id="quizRes"></p></div>
+</section>
 
-  <section id="clasificacion">
-    <h2 class="sec">Clasificación</h2>
-    <p>Hay dos formas comunes de clasificar la soldadura. Elige una para ver los detalles.</p>
-    <div class="segmentos" role="tablist">
-      <button class="seg activo" data-clas="union">Por tipo de unión</button>
-      <button class="seg" data-clas="auto">Por automatización</button>
-    </div>
-    <div class="card" id="clasPanel"></div>
-  </section>
+<section id="clasificacion">
+<h2 class="sec">Clasificación</h2>
+<p>No hay una sola forma de clasificar la soldadura. Estas cinco vistas se complementan.</p>
+<div class="segmentos">
+<button class="seg activo" data-clas="mecanismo">Mecanismo</button>
+<button class="seg" data-clas="energia">Fuente de energía</button>
+<button class="seg" data-clas="auto">Automatización</button>
+<button class="seg" data-clas="union">Tipo de unión</button>
+<button class="seg" data-clas="posicion">Posición</button>
+</div>
+<div class="card" id="clasPanel"></div>
+</section>
 
-  <section id="tipos">
-    <h2 class="sec">Tipos de soldadura</h2>
-    <p>Busca por nombre o sigla, o marca tipos en el menú lateral para filtrarlos.</p>
-    <input type="search" id="buscar" class="buscar" placeholder="Buscar: MIG, láser, aluminio…" aria-label="Buscar tipo de soldadura">
-    <div id="cards"></div>
-  </section>
+<section id="tipos">
+<h2 class="sec">Tipos de soldadura</h2>
+<p>Busca por nombre, sigla o uso, o marca tipos en el menú lateral. Cada tarjeta trae su diagrama, ventajas, desventajas y seguridad.</p>
+<input type="search" id="buscar" class="buscar" placeholder="Buscar: MIG, láser, aluminio…" aria-label="Buscar tipo de soldadura">
+<div id="cards"></div>
+</section>
 
-  <section id="instrumentos">
-    <h2 class="sec">Instrumentos y equipo</h2>
-    <p>Pulsa cada categoría para ver lo que incluye.</p>
-    <details class="acordeon" open>
-      <summary>Fuentes de energía</summary>
-      <ul>
-        <li>Transformadores: corriente alterna, robustos y económicos.</li>
-        <li>Rectificadores: corriente continua, arco más estable.</li>
-        <li>Inversores: equipos modernos, ligeros y eficientes.</li>
-      </ul>
-    </details>
-    <details class="acordeon">
-      <summary>Consumibles y accesorios</summary>
-      <ul>
-        <li>Electrodos revestidos, alambre sólido o tubular.</li>
-        <li>Gases de protección: argón, CO₂ o mezclas.</li>
-        <li>Pinza de masa, porta electrodo y antorcha.</li>
-        <li>Piqueta y cepillo de alambre para retirar la escoria.</li>
-      </ul>
-    </details>
-    <details class="acordeon">
-      <summary>Herramientas de medición</summary>
-      <ul>
-        <li>Calibrador de soldadura (galga) para medir cordones.</li>
-        <li>Escuadra y flexómetro para alinear piezas.</li>
-        <li>Amperímetro y voltímetro del equipo.</li>
-        <li>Medidor de flujo de gas.</li>
-      </ul>
-    </details>
-    <details class="acordeon">
-      <summary>Protección personal</summary>
-      <ul>
-        <li>Careta o casco con filtro adecuado al amperaje.</li>
-        <li>Guantes de cuero y ropa ignífuga.</li>
-        <li>Polainas y botas de seguridad.</li>
-        <li>Protección respiratoria y ventilación.</li>
-      </ul>
-    </details>
-  </section>
+<section id="instrumentos">
+<h2 class="sec">Instrumentos y equipo</h2>
+<p>Pulsa cada categoría para ver el detalle.</p>
+<details class="acordeon" open><summary>Fuentes de energía</summary><ul>
+<li><strong>Transformador:</strong> corriente alterna, robusto y económico.</li>
+<li><strong>Rectificador:</strong> convierte a corriente continua para un arco más estable.</li>
+<li><strong>Inversor:</strong> electrónico, ligero y eficiente. Es el estándar actual en equipos portátiles.</li></ul></details>
+<details class="acordeon"><summary>Polaridad (corriente continua)</summary><ul>
+<li><strong>DCEP (electrodo positivo):</strong> la mayor parte del calor queda en el electrodo. Es la polaridad habitual en MIG y en muchos electrodos revestidos.</li>
+<li><strong>DCEN (electrodo negativo):</strong> la mayor parte del calor queda en la pieza y hay más penetración. Se usa en TIG sobre acero.</li>
+<li><strong>Corriente alterna:</strong> en TIG de aluminio alterna entre ambas; la fase positiva rompe la capa de óxido del aluminio.</li></ul></details>
+<details class="acordeon"><summary>Consumibles y accesorios</summary><ul>
+<li>Electrodos revestidos, alambre sólido o tubular, varillas de aporte.</li>
+<li>Gases de protección: argón, CO₂ o mezclas de ambos.</li>
+<li>Pinza de masa, porta electrodo, antorcha y boquillas.</li>
+<li>Piqueta y cepillo de alambre para retirar la escoria.</li></ul></details>
+<details class="acordeon"><summary>Parámetros que se controlan</summary><ul>
+<li><strong>Amperaje:</strong> define cuánto calor llega a la unión y qué penetración se logra.</li>
+<li><strong>Voltaje:</strong> controla la longitud y el ancho del arco, sobre todo en MIG.</li>
+<li><strong>Velocidad de avance:</strong> muy lenta acumula calor de más; muy rápida deja el cordón delgado.</li>
+<li><strong>Caudal de gas:</strong> poco deja poros, y demasiado crea turbulencia que también contamina.</li></ul></details>
+<details class="acordeon"><summary>Ciclo de trabajo</summary><p style="padding:0 4px 18px">Indica cuántos minutos de cada 10 puede soldar el equipo a una corriente dada sin sobrecalentarse. Con un ciclo de 60 % a 200 A, el equipo suelda 6 minutos y descansa 4. Si se supera, la protección térmica lo apaga.</p></details>
+<details class="acordeon"><summary>Preparación y medición</summary><ul>
+<li>Amoladora, cepillo y lima para limpiar óxido, pintura y grasa.</li>
+<li>Escuadra, flexómetro y galga para alinear piezas y medir cordones.</li>
+<li>Prensas y soportes para fijar las piezas y evitar deformaciones.</li></ul></details>
+</section>
 
-  <section id="esquemas">
-    <h2 class="sec">Esquemas</h2>
-    <p>Elige un proceso para ver su diagrama.</p>
-    <div class="segmentos" id="esqBotones">
-      <button class="seg activo" data-img="smaw.svg">SMAW</button>
-      <button class="seg" data-img="gmaw.svg">MIG</button>
-      <button class="seg" data-img="gtaw.svg">TIG</button>
-      <button class="seg" data-img="plasma.svg">Plasma</button>
-    </div>
-    <div class="svgbox"><img id="esqImg" src="smaw.svg" alt="Diagrama del proceso seleccionado"></div>
-    <p class="empty" style="margin-top:10px">Diagramas simplificados. Para detalles de tu equipo, consulta su manual.</p>
-  </section>
+<section id="esquemas">
+<h2 class="sec">Esquemas</h2>
+<p>Elige un esquema para ver el diagrama y su explicación.</p>
+<div class="segmentos" id="esqBotones">
+<button class="seg activo" data-e="circuito">Circuito de arco</button>
+<button class="seg" data-e="uniones">Uniones</button>
+<button class="seg" data-e="cordon">Cordón</button>
+<button class="seg" data-e="posiciones">Posiciones</button>
+<button class="seg" data-e="llamas">Llamas</button>
+</div>
+<div class="card" id="esqBox"></div>
+</section>
 
-  <section id="comparativa">
-    <h2 class="sec">Comparativa</h2>
-    <div class="card">
-      <h3>¿Qué proceso me conviene?</h3>
-      <p class="empty">Responde dos preguntas y te sugerimos un proceso como punto de partida.</p>
-      <div class="grid2">
-        <label class="campo">Material
-          <select id="selMat">
-            <option value="acero">Acero al carbono</option>
-            <option value="inox">Acero inoxidable</option>
-            <option value="aluminio">Aluminio</option>
-            <option value="lamina">Lámina delgada</option>
-          </select>
-        </label>
-        <label class="campo">Lugar de trabajo
-          <select id="selAmb">
-            <option value="taller">Taller o fábrica</option>
-            <option value="campo">Exterior o campo</option>
-          </select>
-        </label>
-      </div>
-      <p class="sugerencia" id="sugerencia"></p>
-    </div>
-    <div class="wrap">
-      <table>
-        <thead><tr><th>Proceso</th><th>Dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
-        <tbody>
-          <tr><td>SMAW</td><td>Baja–media</td><td>Baja</td><td>Bajo</td><td>Campo, construcción, mantenimiento</td></tr>
-          <tr><td>GMAW (MIG)</td><td>Media</td><td>Alta</td><td>Medio</td><td>Fabricación, automotriz</td></tr>
-          <tr><td>GTAW (TIG)</td><td>Alta</td><td>Baja</td><td>Medio–alto</td><td>Aluminio, acero inoxidable, precisión</td></tr>
-          <tr><td>FCAW</td><td>Media</td><td>Alta</td><td>Medio</td><td>Estructuras, exteriores</td></tr>
-          <tr><td>SAW</td><td>Media</td><td>Muy alta</td><td>Alto</td><td>Piezas grandes y gruesas</td></tr>
-          <tr><td>Resistencia (puntos)</td><td>Baja</td><td>Muy alta</td><td>Medio–alto</td><td>Lámina, carrocerías</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+<section id="comparativa">
+<h2 class="sec">Comparativa</h2>
+<div class="card">
+<h3>¿Qué proceso me conviene?</h3>
+<p class="empty">Elige material y lugar de trabajo para ver un punto de partida.</p>
+<div class="grid2">
+<label class="campo">Material<select id="selMat"><option value="acero">Acero al carbono</option><option value="inox">Acero inoxidable</option><option value="aluminio">Aluminio</option><option value="lamina">Lámina delgada</option></select></label>
+<label class="campo">Lugar de trabajo<select id="selAmb"><option value="taller">Taller o fábrica</option><option value="campo">Exterior o campo</option></select></label>
+</div>
+<p class="sugerencia" id="sugerencia"></p>
+</div>
+<div class="wrap"><table>
+<thead><tr><th>Proceso</th><th>Protección</th><th>Dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
+<tbody>
+<tr><td>SMAW</td><td>Escoria del revestimiento</td><td>Baja–media</td><td>Baja</td><td>Bajo</td><td>Campo, construcción, mantenimiento</td></tr>
+<tr><td>GMAW (MIG)</td><td>Gas externo</td><td>Media</td><td>Alta</td><td>Medio</td><td>Fabricación, automotriz</td></tr>
+<tr><td>GTAW (TIG)</td><td>Gas inerte</td><td>Alta</td><td>Baja</td><td>Medio–alto</td><td>Aluminio, inoxidable, precisión</td></tr>
+<tr><td>FCAW</td><td>Fundente interno, con o sin gas</td><td>Media</td><td>Alta</td><td>Medio</td><td>Estructuras, exteriores</td></tr>
+<tr><td>SAW</td><td>Fundente granular</td><td>Media</td><td>Muy alta</td><td>Alto</td><td>Piezas grandes y gruesas</td></tr>
+<tr><td>OAW</td><td>Llama</td><td>Media</td><td>Baja</td><td>Bajo</td><td>Reparaciones, corte, tubería delgada</td></tr>
+<tr><td>RSW</td><td>No requiere</td><td>Baja</td><td>Muy alta</td><td>Medio–alto</td><td>Lámina, carrocerías</td></tr>
+<tr><td>FSW</td><td>No requiere</td><td>Alta</td><td>Media</td><td>Muy alto</td><td>Aluminio aeroespacial y ferroviario</td></tr>
+<tr><td>LBW</td><td>Gas inerte</td><td>Alta</td><td>Muy alta</td><td>Muy alto</td><td>Electrónica, automotriz, médico</td></tr>
+<tr><td>PAW</td><td>Gas plasmógeno y de protección</td><td>Alta</td><td>Media</td><td>Alto</td><td>Aeroespacial, precisión</td></tr>
+</tbody></table></div>
+</section>
 
-  <section id="seguridad">
-    <h2 class="sec">Seguridad</h2>
-    <div class="card">
-      <h3>Lista antes de soldar</h3>
-      <p class="empty">Marca cada punto. La lista se reinicia al recargar la página.</p>
-      <div class="progreso"><div id="progBarra"></div></div>
-      <p class="progTexto" id="progTexto"></p>
-      <label class="check"><input type="checkbox" class="chk"> Equipo revisado: cables, pinza y conexiones en buen estado</label>
-      <label class="check"><input type="checkbox" class="chk"> Careta con filtro adecuado y ropa de algodón o cuero</label>
-      <label class="check"><input type="checkbox" class="chk"> Área ventilada o con extracción de humos</label>
-      <label class="check"><input type="checkbox" class="chk"> Materiales inflamables retirados</label>
-      <label class="check"><input type="checkbox" class="chk"> Extintor cerca y al alcance</label>
-      <label class="check"><input type="checkbox" class="chk"> Cilindros de gas asegurados en posición vertical</label>
-    </div>
-    <div class="card">
-      <ul>
-        <li><strong>Radiación del arco:</strong> la radiación UV e IR daña la vista y la piel.</li>
-        <li><strong>Humos y gases:</strong> zinc, cromo y plomo producen humos tóxicos.</li>
-        <li><strong>Riesgo eléctrico:</strong> no toques partes energizadas y mantén la ropa seca.</li>
-        <li><strong>Quemaduras:</strong> las piezas siguen calientes mucho tiempo después de soldar.</li>
-      </ul>
-      <p class="warn"><strong>Importante:</strong> nunca sueldes recipientes que hayan contenido combustibles sin limpiarlos y purgarlos antes.</p>
-    </div>
-  </section>
+<section id="seguridad">
+<h2 class="sec">Seguridad</h2>
+<p>La mayoría de los accidentes en soldadura se evitan con preparación. Empieza por la lista y revisa después los riesgos de cada proceso.</p>
+<div class="card"><h3>Lista antes de soldar</h3>
+<div class="progreso"><div id="progBarra"></div></div><p class="progTexto" id="progTexto"></p>
+<label class="check"><input type="checkbox" class="chk"> Equipo revisado: cables, pinza y conexiones en buen estado</label>
+<label class="check"><input type="checkbox" class="chk"> Careta con el filtro adecuado y ropa de algodón o cuero</label>
+<label class="check"><input type="checkbox" class="chk"> Área ventilada o con extracción de humos</label>
+<label class="check"><input type="checkbox" class="chk"> Materiales inflamables retirados</label>
+<label class="check"><input type="checkbox" class="chk"> Extintor cerca y al alcance</label>
+<label class="check"><input type="checkbox" class="chk"> Cilindros de gas asegurados en posición vertical</label></div>
+<h3 class="sub">Riesgos y cómo prevenirlos</h3>
+<div class="wrap"><table>
+<thead><tr><th>Riesgo</th><th>Origen</th><th>Prevención</th></tr></thead><tbody>
+<tr><td>Radiación</td><td>El arco emite luz visible, ultravioleta e infrarroja</td><td>Careta con filtro, ropa que cubra la piel y biombos para quienes están cerca</td></tr>
+<tr><td>Humos y gases</td><td>Metal, recubrimientos (zinc, cromo, plomo) y gases de protección</td><td>Ventilación o extracción localizada, y respirador si hace falta</td></tr>
+<tr><td>Descarga eléctrica</td><td>Cables dañados, humedad, partes energizadas</td><td>Aislamiento en buen estado, guantes secos, no soldar sobre charcos</td></tr>
+<tr><td>Incendio y explosión</td><td>Chispas, escoria caliente, recipientes con restos de combustible</td><td>Retirar inflamables, extintor a mano, nunca soldar tanques sin purgarlos</td></tr>
+<tr><td>Quemaduras</td><td>Piezas calientes, salpicaduras</td><td>Guantes, mangas, polainas y botas cerradas</td></tr>
+<tr><td>Gases comprimidos</td><td>Caída de cilindros, fugas, válvulas dañadas</td><td>Cilindros asegurados, reguladores revisados, válvulas antirretorno en oxigás</td></tr>
+<tr><td>Ruido y postura</td><td>Esmerilado, trabajo prolongado en posiciones forzadas</td><td>Protección auditiva, pausas y mesas a buena altura</td></tr>
+</tbody></table></div>
+<h3 class="sub">Protección personal</h3>
+<div class="card"><ul>
+<li><strong>Careta:</strong> filtro de tono 10 a 14 en procesos de arco, más oscuro cuanto mayor es la corriente. En oxigás se usan gafas con tonos 4 a 6.</li>
+<li><strong>Ropa:</strong> algodón grueso, lana o cuero. Evita sintéticos, que se derriten y se pegan a la piel.</li>
+<li><strong>Guantes y calzado:</strong> guantes de cuero largos y botas cerradas. Los pantalones van por fuera de la bota.</li>
+<li><strong>Respiración:</strong> respirador con filtro para humos en espacios cerrados o con metales recubiertos.</li></ul></div>
+<h3 class="sub">Primeros auxilios básicos</h3>
+<details class="acordeon"><summary>Ojo de arco (lesión por radiación)</summary><p style="padding:0 4px 18px">Los síntomas, como ardor y sensación de arena en los ojos, aparecen unas horas después. No frotes los ojos. Aplica compresas frías y busca atención médica.</p></details>
+<details class="acordeon"><summary>Quemaduras</summary><p style="padding:0 4px 18px">Enfría con agua corriente fresca durante 10 a 20 minutos. No uses hielo ni revientes ampollas. Si la quemadura es grande o profunda, acude a urgencias.</p></details>
+<details class="acordeon"><summary>Descarga eléctrica</summary><p style="padding:0 4px 18px">No toques a la persona hasta cortar la energía. Llama a emergencias aunque parezca estar bien, porque pueden aparecer problemas cardíacos después.</p></details>
+<details class="acordeon"><summary>Inhalación de humos</summary><p style="padding:0 4px 18px">Sal al aire fresco. Si aparecen fiebre, escalofríos o dificultad para respirar, busca atención médica; puede ser fiebre de los humos metálicos.</p></details>
+<p class="warn"><strong>Importante:</strong> esta información es general, para estudio. En el taller, sigue las normas vigentes (como ANSI Z49.1) y las indicaciones de tu instructor.</p>
+</section>
+
+<section id="glosario">
+<h2 class="sec">Glosario</h2>
+<input type="search" id="bGlos" class="buscar" placeholder="Buscar término…" aria-label="Buscar en el glosario">
+<dl id="glosario" class="gl">
+<div class="term"><dt>Cordón</dt><dd>Depósito de metal que queda al avanzar la soldadura.</dd></div>
+<div class="term"><dt>Charco de fusión</dt><dd>Zona de metal líquido justo debajo del arco o de la llama.</dd></div>
+<div class="term"><dt>Metal base</dt><dd>El material de las piezas que se van a unir.</dd></div>
+<div class="term"><dt>Metal de aporte</dt><dd>Material que se agrega a la unión: electrodo, alambre o varilla.</dd></div>
+<div class="term"><dt>Escoria</dt><dd>Capa sólida formada por el revestimiento o el fundente. Protege el cordón mientras se enfría y se retira después.</dd></div>
+<div class="term"><dt>Fundente</dt><dd>Compuesto que limpia el metal y lo protege del aire durante la soldadura.</dd></div>
+<div class="term"><dt>ZAC</dt><dd>Zona afectada por el calor: no se funde, pero cambia su estructura y propiedades.</dd></div>
+<div class="term"><dt>Penetración</dt><dd>Profundidad a la que se funde el metal base en la unión.</dd></div>
+<div class="term"><dt>Porosidad</dt><dd>Burbujas de gas atrapadas en el cordón. Suelen venir de mala protección o piezas sucias.</dd></div>
+<div class="term"><dt>Socavación</dt><dd>Surco en el metal base junto al cordón, causado por exceso de calor.</dd></div>
+<div class="term"><dt>Falta de fusión</dt><dd>Zona donde el cordón no llegó a unirse con el metal base.</dd></div>
+<div class="term"><dt>Pasada de raíz</dt><dd>Primer cordón de una unión, que sella el fondo de la ranura.</dd></div>
+<div class="term"><dt>Bisel</dt><dd>Borde cortado en ángulo para que la soldadura penetre en piezas gruesas.</dd></div>
+<div class="term"><dt>Salpicadura</dt><dd>Gotas de metal que saltan durante la soldadura y se pegan alrededor.</dd></div>
+<div class="term"><dt>Ciclo de trabajo</dt><dd>Porcentaje de 10 minutos que el equipo puede soldar a una corriente dada.</dd></div>
+<div class="term"><dt>Polaridad</dt><dd>Sentido de la corriente continua en el circuito. Cambia dónde se concentra el calor.</dd></div>
+</dl>
+</section>
 
 </main>
-
 <footer>Proyecto de clase · Soldadura</footer>
-
+<script src="diagramas.js"></script>
 <script src="datos.js"></script>
 <script src="app.js"></script>
 </body>

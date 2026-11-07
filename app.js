@@ -17,6 +17,7 @@ function renderCard(t){
       <div><strong>Ventajas</strong><ul>${t.ventajas.map(v=>`<li>${v}</li>`).join("")}</ul>
       <strong>Desventajas</strong><ul>${t.desventajas.map(v=>`<li>${v}</li>`).join("")}</ul></div>
     </div>
+    <div class="diag">${(typeof DIAG!=="undefined"&&DIAG[t.id])||""}</div>
     <div class="galeria" data-id="${t.id}"></div>
     <p class="warn" style="margin-top:12px"><strong>Seguridad:</strong> ${t.seguridad}</p>
     ${ytBlock(t)}
@@ -54,7 +55,7 @@ async function buscarImagenes(id){
   for(let n=1; n<=8; n++){
     const base = n===1 ? id : `${id}-${n}`;
     let hit = null;
-    for(const ext of ["jpg","jpeg","png","webp","svg"]){
+    for(const ext of ["jpg","jpeg","png","webp"]){
       hit = await probarImagen(`${base}.${ext}`);
       if(hit) break;
     }
@@ -120,7 +121,10 @@ mostrarSeccion(location.hash.slice(1)||"intro");
 const PREGUNTAS = [
   {p:"¿Qué proceso usa un electrodo de tungsteno que no se consume?", ops:["SMAW","GTAW (TIG)","SAW","Resistencia"], ok:1, ex:"En TIG el tungsteno no se consume; el aporte va con varilla."},
   {p:"¿Cuál proceso une sin fundir el metal base?", ops:["MIG","Láser","Fricción-agitación (FSW)","Plasma"], ok:2, ex:"FSW mezcla el material en estado sólido con una herramienta giratoria."},
-  {p:"¿Qué gas suele usarse como protección en TIG de aluminio?", ops:["Oxígeno","Argón","Hidrógeno","Nitrógeno puro"], ok:1, ex:"El argón es inerte y protege el charco de fusión del aire."}
+  {p:"¿Qué gas suele usarse como protección en TIG de aluminio?", ops:["Oxígeno","Argón","Hidrógeno","Nitrógeno puro"], ok:1, ex:"El argón es inerte y protege el charco de fusión del aire."},
+  {p:"¿Qué significa ZAC en un cordón?", ops:["Zona de aporte controlado","Zona afectada por el calor","Zona de arco continuo","Zona de acero cementado"], ok:1, ex:"Es el metal base que no se fundió, pero cambió su estructura por el calor."},
+  {p:"¿Qué proceso protege el arco con una capa de fundente granular?", ops:["SAW","GTAW","OAW","RSW"], ok:0, ex:"En arco sumergido el arco queda oculto bajo el fundente."},
+  {p:"¿Qué posición de soldadura es la más difícil de controlar?", ops:["1G plana","2G horizontal","4G sobrecabeza","Todas por igual"], ok:2, ex:"En sobrecabeza la gravedad juega en contra del charco de fusión."}
 ];
 const quizEl = document.getElementById("quizPreguntas");
 const quizRes = document.getElementById("quizRes");
@@ -147,17 +151,35 @@ quizEl.addEventListener("click",e=>{
 
 // Clasificación: cambiar entre vistas
 const CLAS = {
-  union:`<h3>Por tipo de unión</h3>
-    <ul>
-      <li><strong>Por fusión:</strong> las piezas se funden en la zona de unión. Ejemplos: arco, MIG, TIG, láser, oxigás.</li>
-      <li><strong>Por presión o estado sólido:</strong> se unen sin fundir el metal base. Ejemplos: resistencia por puntos, fricción-agitación.</li>
-    </ul>`,
-  auto:`<h3>Por grado de automatización</h3>
-    <ul>
-      <li><strong>Manual:</strong> el operador controla todo el proceso.</li>
-      <li><strong>Semiautomática:</strong> el equipo alimenta el material y el operador guía la pistola.</li>
-      <li><strong>Automática o robotizada:</strong> el proceso sigue un programa, con poca intervención humana.</li>
-    </ul>`
+  mecanismo:`<h3>Por mecanismo de unión</h3><ul>
+  <li><strong>Por fusión:</strong> el metal base y el de aporte se funden y solidifican formando el cordón. Es el grupo más amplio: arco, oxigás, plasma y láser.</li>
+  <li><strong>En estado sólido:</strong> la unión ocurre por presión o fricción sin fundir el metal base. Ejemplos: fricción-agitación, ultrasonido y difusión.</li>
+  <li><strong>Por resistencia:</strong> el paso de corriente genera el calor y se aplica presión. Ejemplos: puntos, costura y proyección.</li></ul>
+  <p>Aparte están la soldadura fuerte (brazing) y la blanda, donde solo se funde el aporte y el metal base no. Se separan por temperatura: unos 450 °C.</p>`,
+  energia:`<h3>Por fuente de energía</h3><ul>
+  <li><strong>Arco eléctrico:</strong> SMAW, GMAW (MIG/MAG), GTAW (TIG), FCAW, SAW y PAW.</li>
+  <li><strong>Llama de gas:</strong> oxiacetilénica (OAW).</li>
+  <li><strong>Resistencia eléctrica:</strong> por puntos (RSW), costura y proyección.</li>
+  <li><strong>Haz de alta energía:</strong> láser (LBW) y haz de electrones (EBW).</li>
+  <li><strong>Fricción:</strong> fricción-agitación (FSW) y fricción rotatoria.</li></ul>`,
+  auto:`<h3>Por grado de automatización</h3><ul>
+  <li><strong>Manual:</strong> el operador controla la antorcha o el electrodo y todos los parámetros.</li>
+  <li><strong>Semiautomática:</strong> el equipo alimenta el alambre y el operador guía la pistola, como en MIG.</li>
+  <li><strong>Mecanizada:</strong> una máquina mueve la antorcha, pero un operador observa y ajusta durante el proceso.</li>
+  <li><strong>Automática o robotizada:</strong> el ciclo sigue un programa, con poca o ninguna intervención.</li></ul>`,
+  union:`<h3>Por tipo de unión</h3><ul>
+  <li><strong>A tope:</strong> dos piezas en el mismo plano. En espesores grandes se les hace bisel.</li>
+  <li><strong>A traslape:</strong> las piezas se superponen y se sueldan por el borde. Es común en lámina.</li>
+  <li><strong>En T:</strong> una pieza perpendicular sobre otra, como en vigas y refuerzos.</li>
+  <li><strong>En esquina:</strong> dos piezas formando un ángulo de 90°, usada en marcos y cajas.</li>
+  <li><strong>De borde:</strong> se sueldan los bordes de dos láminas apoyadas una sobre otra.</li></ul>`,
+  posicion:`<h3>Por posición de soldadura</h3><ul>
+  <li><strong>Plana (1G / 1F):</strong> la más sencilla, porque la gravedad ayuda al charco.</li>
+  <li><strong>Horizontal (2G / 2F):</strong> el cordón corre en horizontal sobre una pieza vertical.</li>
+  <li><strong>Vertical (3G / 3F):</strong> exige controlar el goteo del metal fundido.</li>
+  <li><strong>Sobrecabeza (4G / 4F):</strong> la más difícil: la gravedad actúa contra el charco.</li>
+  <li><strong>Tubería (5G / 6G):</strong> el tubo queda fijo y el soldador rodea la unión.</li></ul>
+  <p>G indica soldadura de ranura (groove) y F de filete (fillet), según la nomenclatura AWS y ASME.</p>`
 };
 const clasPanel = document.getElementById("clasPanel");
 clasPanel.innerHTML = CLAS.union;
@@ -166,13 +188,16 @@ document.querySelectorAll(".seg[data-clas]").forEach(b=>b.addEventListener("clic
   clasPanel.innerHTML = CLAS[b.dataset.clas];
 }));
 
-// Esquemas: cambiar diagrama
-document.querySelectorAll("#esqBotones .seg").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll("#esqBotones .seg").forEach(x=>x.classList.toggle("activo",x===b));
-  const img = document.getElementById("esqImg");
-  img.src = b.dataset.img;
-  img.alt = "Diagrama del proceso " + b.textContent;
-}));
+// Esquemas: diagramas didácticos
+const esqBox = document.getElementById("esqBox");
+function verEsquema(k){
+  if(typeof ESQ==="undefined") return;
+  const e = ESQ[k];
+  esqBox.innerHTML = `<h3>${e.t}</h3>${e.svg}<p style="margin-top:14px">${e.txt}</p>`;
+  document.querySelectorAll("#esqBotones .seg").forEach(x=>x.classList.toggle("activo",x.dataset.e===k));
+}
+document.querySelectorAll("#esqBotones .seg").forEach(b=>b.addEventListener("click",()=>verEsquema(b.dataset.e)));
+verEsquema("circuito");
 
 // Comparativa: sugerencia según material y lugar
 const SUG = {
@@ -196,3 +221,10 @@ function actualizarProgreso(){
 }
 checks.forEach(c=>c.addEventListener("change",actualizarProgreso));
 actualizarProgreso();
+
+// Glosario: búsqueda
+const bGlos = document.getElementById("bGlos");
+bGlos.addEventListener("input",()=>{
+  const q = bGlos.value.toLowerCase();
+  document.querySelectorAll("#glosario .term").forEach(t=>t.style.display = t.textContent.toLowerCase().includes(q) ? "" : "none");
+});
