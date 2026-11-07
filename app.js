@@ -2,8 +2,8 @@ const cardsEl = document.getElementById("cards");
 const filtersEl = document.getElementById("filters");
 
 function ytBlock(t){
-  if(t.yt) return `<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/${t.yt}" title="Video ${t.sigla}" allowfullscreen loading="lazy"></iframe></div>`;
   const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.busqueda));
+  if(t.yt) return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://i.ytimg.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" loading="lazy"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
   return `<div class="video"><div class="video-empty"><p>Videos de este proceso en español</p><a target="_blank" rel="noopener" href="${href}">Ver en YouTube</a></div></div>`;
 }
 
