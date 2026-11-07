@@ -3,8 +3,8 @@ const filtersEl = document.getElementById("filters");
 
 function ytBlock(t){
   if(t.yt) return `<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/${t.yt}" title="Video ${t.sigla}" allowfullscreen loading="lazy"></iframe></div>`;
-  const q = encodeURIComponent(t.busqueda);
-  return `<div class="video"><div class="video-empty"><p>Video pendiente</p><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${q}">Buscar en YouTube</a></div></div>`;
+  const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.busqueda));
+  return `<div class="video"><div class="video-empty"><p>Videos de este proceso en español</p><a target="_blank" rel="noopener" href="${href}">Ver en YouTube</a></div></div>`;
 }
 
 function renderCard(t){
