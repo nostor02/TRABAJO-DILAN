@@ -2,9 +2,8 @@ const cardsEl = document.getElementById("cards");
 const filtersEl = document.getElementById("filters");
 
 function ytBlock(t){
-  const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.busqueda));
-  if(t.yt) return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://i.ytimg.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" loading="lazy"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
-  return `<div class="video"><div class="video-empty"><p>Videos de este proceso en español</p><a target="_blank" rel="noopener" href="${href}">Ver en YouTube</a></div></div>`;
+  const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.sigla+" soldadura español"));
+  return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://i.ytimg.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" loading="lazy"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
 }
 
 function renderCard(t){
@@ -18,7 +17,7 @@ function renderCard(t){
       <strong>Desventajas</strong><ul>${t.desventajas.map(v=>`<li>${v}</li>`).join("")}</ul></div>
     </div>
     <div class="diag">${(typeof DIAG!=="undefined"&&DIAG[t.id])||""}</div>
-    <div class="galeria" data-id="${t.id}"></div>
+    <div class="galeria">${(t.fotos||[]).map((s,i)=>`<figure><img src="${s}" alt="${t.nombre}, foto ${i+1}" loading="lazy"><figcaption>${t.sigla}</figcaption></figure>`).join("")}</div>
     <p class="warn" style="margin-top:12px"><strong>Seguridad:</strong> ${t.seguridad}</p>
     ${ytBlock(t)}
   </article>`;
@@ -34,44 +33,6 @@ function applyFilter(){
   const q = (document.getElementById("buscar")?.value || "").trim().toLowerCase();
   const visibles = TIPOS.filter(t=>sel.includes(t.id) && (!q || (t.sigla+" "+t.nombre+" "+t.desc+" "+t.uso).toLowerCase().includes(q)));
   cardsEl.innerHTML = visibles.length ? visibles.map(renderCard).join("") : `<p class="empty">Selecciona al menos un tipo de soldadura en el menú.</p>`;
-  cargarGalerias();
-}
-
-// Imágenes automáticas desde la carpeta img/.
-// Nombres esperados: smaw.jpg, smaw-2.jpg, smaw-3.jpg... (también .png, .webp o .jpeg).
-// Si no existe una imagen, simplemente no se muestra.
-const imgCache = {};
-function probarImagen(src){
-  return new Promise(res=>{
-    const i = new Image();
-    i.onload = ()=>res(src);
-    i.onerror = ()=>res(null);
-    i.src = src;
-  });
-}
-async function buscarImagenes(id){
-  if(imgCache[id]) return imgCache[id];
-  const encontradas = [];
-  for(let n=1; n<=8; n++){
-    const base = n===1 ? id : `${id}-${n}`;
-    let hit = null;
-    for(const ext of ["jpg","jpeg","png","webp"]){
-      hit = await probarImagen(`${base}.${ext}`);
-      if(hit) break;
-    }
-    if(!hit) break;
-    encontradas.push(hit);
-  }
-  imgCache[id] = encontradas;
-  return encontradas;
-}
-async function cargarGalerias(){
-  for(const t of TIPOS){
-    const cont = document.querySelector(`.galeria[data-id="${t.id}"]`);
-    if(!cont) continue;
-    const srcs = await buscarImagenes(t.id);
-    cont.innerHTML = srcs.map((s,i)=>`<figure><img src="${s}" alt="${t.nombre}, foto ${i+1}" loading="lazy"><figcaption>${t.sigla}</figcaption></figure>`).join("");
-  }
 }
 
 buildFilters();
@@ -182,7 +143,7 @@ const CLAS = {
   <p>G indica soldadura de ranura (groove) y F de filete (fillet), según la nomenclatura AWS y ASME.</p>`
 };
 const clasPanel = document.getElementById("clasPanel");
-clasPanel.innerHTML = CLAS.union;
+clasPanel.innerHTML = CLAS.mecanismo;
 document.querySelectorAll(".seg[data-clas]").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".seg[data-clas]").forEach(x=>x.classList.toggle("activo",x===b));
   clasPanel.innerHTML = CLAS[b.dataset.clas];
