@@ -54,7 +54,7 @@ async function buscarImagenes(id){
     const base = n===1 ? id : `${id}-${n}`;
     let hit = null;
     for(const ext of ["jpg","jpeg","png","webp","svg"]){
-      hit = await probarImagen(`img/${base}.${ext}`);
+      hit = await probarImagen(`${base}.${ext}`);
       if(hit) break;
     }
     if(!hit) break;
