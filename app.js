@@ -62,6 +62,8 @@ burger.addEventListener("click",()=>setMenu(!side.classList.contains("open")));
 const canHover = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
 if(canHover){
   burger.addEventListener("mouseenter",()=>setMenu(true));
+  // Al llevar el cursor al borde izquierdo de la pantalla, el menú se abre solo
+  document.addEventListener("mousemove",e=>{ if(e.clientX<=12 && !side.classList.contains("open")) setMenu(true); });
   side.addEventListener("mouseleave",()=>setMenu(false));
 }
 overlay.addEventListener("click",()=>setMenu(false));
