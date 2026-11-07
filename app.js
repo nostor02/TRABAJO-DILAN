@@ -17,6 +17,7 @@ function renderCard(t){
       <div><strong>Ventajas</strong><ul>${t.ventajas.map(v=>`<li>${v}</li>`).join("")}</ul>
       <strong>Desventajas</strong><ul>${t.desventajas.map(v=>`<li>${v}</li>`).join("")}</ul></div>
     </div>
+    <div class="galeria" data-id="${t.id}"></div>
     <p class="warn" style="margin-top:12px"><strong>Seguridad:</strong> ${t.seguridad}</p>
     ${ytBlock(t)}
   </article>`;
@@ -31,6 +32,44 @@ function applyFilter(){
   const sel = [...document.querySelectorAll(".f:checked")].map(c=>c.value);
   const visibles = TIPOS.filter(t=>sel.includes(t.id));
   cardsEl.innerHTML = visibles.length ? visibles.map(renderCard).join("") : `<p class="empty">Selecciona al menos un tipo de soldadura en el menú.</p>`;
+  cargarGalerias();
+}
+
+// Imágenes automáticas desde la carpeta img/.
+// Nombres esperados: smaw.jpg, smaw-2.jpg, smaw-3.jpg... (también .png, .webp o .jpeg).
+// Si no existe una imagen, simplemente no se muestra.
+const imgCache = {};
+function probarImagen(src){
+  return new Promise(res=>{
+    const i = new Image();
+    i.onload = ()=>res(src);
+    i.onerror = ()=>res(null);
+    i.src = src;
+  });
+}
+async function buscarImagenes(id){
+  if(imgCache[id]) return imgCache[id];
+  const encontradas = [];
+  for(let n=1; n<=8; n++){
+    const base = n===1 ? id : `${id}-${n}`;
+    let hit = null;
+    for(const ext of ["jpg","jpeg","png","webp","svg"]){
+      hit = await probarImagen(`img/${base}.${ext}`);
+      if(hit) break;
+    }
+    if(!hit) break;
+    encontradas.push(hit);
+  }
+  imgCache[id] = encontradas;
+  return encontradas;
+}
+async function cargarGalerias(){
+  for(const t of TIPOS){
+    const cont = document.querySelector(`.galeria[data-id="${t.id}"]`);
+    if(!cont) continue;
+    const srcs = await buscarImagenes(t.id);
+    cont.innerHTML = srcs.map((s,i)=>`<figure><img src="${s}" alt="${t.nombre}, foto ${i+1}" loading="lazy"><figcaption>${t.sigla}</figcaption></figure>`).join("");
+  }
 }
 
 buildFilters();
