@@ -198,3 +198,49 @@ bGlos.addEventListener("input",()=>{
   const q = bGlos.value.toLowerCase();
   document.querySelectorAll("#glosario .term").forEach(t=>t.style.display = t.textContent.toLowerCase().includes(q) ? "" : "none");
 });
+
+// Inicio: estadísticas animadas y cronología en barras
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.getElementById("nTipos").dataset.n = TIPOS.length;
+document.getElementById("nTipos").textContent = TIPOS.length;
+function alEntrar(el,fn){
+  if(!("IntersectionObserver" in window)){ fn(); return; }
+  const o = new IntersectionObserver(es=>{ if(es[0].isIntersecting){ fn(); o.disconnect(); } },{threshold:.3});
+  o.observe(el);
+}
+function contar(el){
+  const fin = +el.dataset.n, pre = el.dataset.pre || "";
+  if(reduceMotion) return;
+  const t0 = performance.now();
+  (function paso(t){
+    const k = Math.min((t-t0)/1200,1);
+    el.textContent = pre + Math.round(fin*(1-Math.pow(1-k,3)));
+    if(k<1) requestAnimationFrame(paso);
+  })(t0);
+}
+const statsEl = document.querySelector(".stats");
+alEntrar(statsEl,()=>statsEl.querySelectorAll(".num").forEach(contar));
+
+const CRONO = [
+  {a:"~1800", n:"Arco eléctrico", t:"Humphry Davy demuestra el arco eléctrico, base de toda la soldadura por arco."},
+  {a:"1881", n:"Arco de carbón", t:"Auguste de Méritens une placas de plomo con un arco de carbón. En 1885 Benardos y Olszewski patentan el proceso."},
+  {a:"1903", n:"Oxiacetileno", t:"Fouché y Picard desarrollan el soplete oxiacetilénico."},
+  {a:"1904", n:"Electrodo revestido", t:"Oscar Kjellberg inventa el electrodo revestido."},
+  {a:"1930s", n:"Arco sumergido", t:"Aparece el arco sumergido (SAW) para fabricar piezas grandes y gruesas."},
+  {a:"1941", n:"TIG", t:"Se desarrolla el TIG para soldar aluminio y magnesio en la industria aeronáutica."},
+  {a:"1948", n:"MIG", t:"Nace el MIG, con alambre continuo y gas protector."},
+  {a:"1991", n:"Fricción-agitación", t:"El instituto TWI (Reino Unido) inventa la fricción-agitación."}
+];
+const cronoEl = document.getElementById("crono"), cronoDet = document.getElementById("cronoDet");
+cronoEl.innerHTML = CRONO.map((c,i)=>`<div class="col"><button class="barra" data-i="${i}" style="--h:${70+i*29}px;--i:${i}" aria-label="${c.a}: ${c.n}"><span>${c.a}</span></button><span class="lab">${c.n}</span></div>`).join("");
+function verCrono(i){
+  const c = CRONO[i];
+  cronoEl.querySelectorAll(".barra").forEach((b,k)=>b.classList.toggle("sel",k===i));
+  cronoDet.innerHTML = `<strong>${c.a} · ${c.n}</strong><p>${c.t}</p>`;
+}
+cronoEl.querySelectorAll(".barra").forEach(b=>{
+  const i = +b.dataset.i;
+  ["click","mouseenter","focus"].forEach(ev=>b.addEventListener(ev,()=>verCrono(i)));
+});
+verCrono(0);
+alEntrar(cronoEl,()=>cronoEl.classList.add("on"));
