@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilos.css?v=5">
+<link rel="stylesheet" href="estilos.css?v=6">
 </head>
 <body>
 <header class="top">
@@ -187,6 +187,16 @@
 </div>
 <p class="sugerencia" id="sugerencia"></p>
 </div>
+<h3 class="sub">Mapa de procesos</h3>
+<p class="empty" style="margin-bottom:16px">Cada punto es un proceso. Cuanto más arriba y a la derecha, mejor en lo que mides. Cambia los ejes para compararlos de otra forma.</p>
+<div class="card mapa">
+<div class="mapa-ctl"><label class="campo">Eje horizontal<select id="mX"></select></label><label class="campo">Eje vertical<select id="mY"></select></label></div>
+<div class="wrap"><svg id="mapaSvg" viewBox="0 0 640 400" role="img" aria-label="Mapa que ubica cada proceso de soldadura según dos criterios a elección"></svg></div>
+<p class="mapa-det" id="mapaDet" aria-live="polite">Pasa el cursor o toca un punto para ver sus valores.</p>
+</div>
+<h3 class="sub">Clasificación general</h3>
+<div class="card" id="rank"></div>
+<p class="empty" style="margin:-4px 0 28px">Puntajes de 1 a 5 (5 es mejor) tomados de la tabla de abajo. Miden velocidad, facilidad de uso y costo del equipo; no miden la calidad ni la precisión de la unión, por eso TIG queda abajo aunque da de las soldaduras más limpias.</p>
 <div class="wrap"><table>
 <thead><tr><th>Proceso</th><th>Protección</th><th>Dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
 <tbody>
@@ -268,8 +278,8 @@
 
 </main>
 <footer>Proyecto de clase · Soldadura</footer>
-<script src="diagramas.js?v=5"></script>
-<script src="datos.js?v=5"></script>
-<script src="app.js?v=5"></script>
+<script src="diagramas.js?v=6"></script>
+<script src="datos.js?v=6"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>

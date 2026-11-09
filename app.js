@@ -320,3 +320,32 @@ function careta(){
   document.getElementById("cLente").style.setProperty("--oscuro",(0.55+n*0.035).toFixed(2));
 }
 cAmp.addEventListener("input",careta); careta();
+
+// Comparativa: mapa de procesos y clasificación (puntajes 1 a 5 sacados de la tabla; 5 es mejor)
+const PUNTOS = {smaw:[1,4,5],gmaw:[4,3,3.5],gtaw:[1,2,2.5],fcaw:[4,3,3.5],saw:[5,3,2],oxi:[1,3,5],res:[5,5,2.5],fsw:[3,2,1],laser:[5,2,1],plasma:[3,2,2]};
+const CRIT = ["Velocidad","Facilidad de uso","Economía del equipo"];
+const mX = document.getElementById("mX"), mY = document.getElementById("mY"), mSvg = document.getElementById("mapaSvg"), mDet = document.getElementById("mapaDet");
+[mX,mY].forEach((s,i)=>{ s.innerHTML = CRIT.map((c,j)=>`<option value="${j}">${c}</option>`).join(""); s.value = i; });
+const sx = v=>60+(v-.5)/5*560, sy = v=>350-(v-.5)/5*330;
+let mg = '<rect class="zona" x="400" y="20" width="220" height="130" rx="6"/>';
+for(let v=1;v<=5;v++) mg += `<line class="g" x1="${sx(v)}" y1="20" x2="${sx(v)}" y2="350"/><line class="g" x1="60" y1="${sy(v)}" x2="620" y2="${sy(v)}"/><text x="${sx(v)}" y="368" text-anchor="middle">${v}</text><text x="52" y="${sy(v)+4}" text-anchor="end">${v}</text>`;
+mg += '<line class="ej" x1="60" y1="350" x2="620" y2="350"/><line class="ej" x1="60" y1="20" x2="60" y2="350"/><text class="tit" id="mxt" x="340" y="392" text-anchor="middle"></text><text class="tit" id="myt" transform="rotate(-90)" x="-185" y="16" text-anchor="middle"></text><text x="612" y="38" text-anchor="end">mejor</text>';
+mg += TIPOS.map(t=>`<g class="pt" id="p-${t.id}" data-id="${t.id}" tabindex="0"><circle r="9"/><text y="-15">${t.sigla.split(" ")[0]}</text></g>`).join("");
+mSvg.innerHTML = mg;
+function pintaMapa(){
+  const ix = +mX.value, iy = +mY.value, gr = {};
+  document.getElementById("mxt").textContent = CRIT[ix]+" (más es mejor)";
+  document.getElementById("myt").textContent = CRIT[iy]+" (más es mejor)";
+  TIPOS.forEach(t=>{ const k = PUNTOS[t.id][ix]+","+PUNTOS[t.id][iy]; (gr[k] = gr[k]||[]).push(t.id); });
+  Object.values(gr).forEach(ids=>ids.forEach((id,i)=>{ const p = PUNTOS[id]; document.getElementById("p-"+id).style.transform = `translate(${sx(p[ix])+(i-(ids.length-1)/2)*22}px,${sy(p[iy])}px)`; }));
+}
+function verPunto(id){
+  const t = TIPOS.find(x=>x.id===id), p = PUNTOS[id];
+  mSvg.querySelectorAll(".pt").forEach(e=>e.classList.toggle("sel",e.dataset.id===id));
+  mDet.innerHTML = `<strong>${t.sigla}</strong>: velocidad ${p[0]}/5, facilidad de uso ${p[1]}/5, economía del equipo ${p[2]}/5.`;
+}
+["mouseover","focusin","click"].forEach(ev=>mSvg.addEventListener(ev,e=>{ const g = e.target.closest(".pt"); if(g) verPunto(g.dataset.id); }));
+mX.addEventListener("change",pintaMapa); mY.addEventListener("change",pintaMapa); pintaMapa();
+const rankEl = document.getElementById("rank");
+rankEl.innerHTML = TIPOS.map(t=>({t, s:PUNTOS[t.id].reduce((a,b)=>a+b,0)})).sort((a,b)=>b.s-a.s).map((r,i)=>`<div class="fila" style="--n:${i}"><span class="pos">${i+1}</span><span>${r.t.sigla.split(" ")[0]}</span><div class="bar"><i style="--w:${r.s/15*100}%"></i></div><span class="val">${String(r.s).replace(".",",")} / 15</span></div>`).join("");
+alEntrar(rankEl,()=>rankEl.classList.add("on"));
