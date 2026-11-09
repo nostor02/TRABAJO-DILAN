@@ -216,3 +216,22 @@ h3.sub{font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.
 .crono-det strong{display:block;font-size:1.05rem;margin-bottom:4px}
 .crono-det p{margin:0;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.hero-svg *,.crono .barra{animation:none!important;transition:none!important}.hero-svg .sp{display:none}}
+
+/* Miniaturas: respaldo, reproductor y galería */
+.vthumb{transition:box-shadow .25s,transform .25s}
+.vthumb:hover{box-shadow:0 10px 28px rgba(0,0,0,.25);transform:translateY(-2px)}
+.vthumb img{transition:transform .4s,opacity .2s}
+.vthumb:hover img{transform:scale(1.05);opacity:1}
+.vthumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vthumb .play{background:rgba(232,112,42,.92);transition:transform .2s}
+.vthumb:hover .play{transform:scale(1.12)}
+.vthumb .vtit{display:none}
+.vthumb.sinmini{background:radial-gradient(120% 120% at 80% 100%,#2d1d12 0,#14181c 60%,#0d1013 100%)}
+.vthumb.sinmini img{display:none}
+.vthumb.sinmini .vtit{display:block;position:absolute;left:0;right:0;top:18%;text-align:center;color:#fff;font-size:1.6rem;font-weight:500;letter-spacing:.02em}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;margin-top:8px}
+.vitem{margin:0}
+.vitem .vthumb{margin-top:0}
+.vitem figcaption{display:flex;flex-direction:column;margin-top:10px;font-size:.88rem;color:var(--muted);line-height:1.4}
+.vitem figcaption strong{color:var(--text);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.vthumb,.vthumb img,.vthumb .play{transition:none!important}.vthumb:hover{transform:none}}

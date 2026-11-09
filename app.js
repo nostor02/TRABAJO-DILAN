@@ -1,17 +1,38 @@
 const cardsEl = document.getElementById("cards");
 const filtersEl = document.getElementById("filters");
 
-// Si la miniatura no carga, prueba otras direcciones de YouTube antes de rendirse
-function miniFallo(img,id){
-  const alt=[`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,`https://img.youtube.com/vi/${id}/mqdefault.jpg`,`https://i.ytimg.com/vi/${id}/mqdefault.jpg`];
-  const n=+(img.dataset.n||0);
-  if(n<alt.length){img.dataset.n=n+1;img.src=alt[n];}else{img.onerror=null;}
+// Miniaturas de YouTube: prueba varias direcciones y, si ninguna carga, muestra una portada propia
+const MINI = id => [`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,`https://i.ytimg.com/vi/${id}/mqdefault.jpg`,`https://img.youtube.com/vi/${id}/hqdefault.jpg`,`https://i.ytimg.com/vi/${id}/0.jpg`];
+function miniFallo(img){
+  const urls = MINI(img.dataset.id), n = +img.dataset.n + 1;
+  if(n < urls.length){ img.dataset.n = n; img.src = urls[n]; }
+  else img.closest(".vthumb").classList.add("sinmini");
+}
+// YouTube devuelve una imagen gris de 120 px cuando no tiene miniatura: se trata como fallo
+function miniOk(img){ if(img.naturalWidth <= 120) miniFallo(img); }
+
+function vthumb(t){
+  return `<a class="vthumb" data-yt="${t.yt}" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="${MINI(t.yt)[0]}" data-id="${t.yt}" data-n="0" alt="Miniatura del video de ${t.sigla}" loading="lazy" referrerpolicy="no-referrer" onerror="miniFallo(this)" onload="miniOk(this)"><span class="vtit">${t.sigla}</span><span class="play"></span></a>`;
 }
 
 function ytBlock(t){
   const href = t.link || ("https://www.youtube.com/results?search_query="+encodeURIComponent(t.sigla+" soldadura español"));
-  return `<a class="vthumb" href="https://www.youtube.com/watch?v=${t.yt}" target="_blank" rel="noopener" aria-label="Ver video de ${t.sigla} en YouTube"><img src="https://img.youtube.com/vi/${t.yt}/hqdefault.jpg" alt="Miniatura del video de ${t.sigla}" referrerpolicy="no-referrer" onerror="miniFallo(this,'${t.yt}')"><span class="play"></span></a><p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
+  return `${vthumb(t)}<p class="masvideos"><a target="_blank" rel="noopener" href="${href}">Ver más videos en español</a></p>`;
 }
+
+// Al tocar una miniatura el video se reproduce ahí mismo (si la página está en un servidor); si no, abre YouTube
+document.addEventListener("click",e=>{
+  const a = e.target.closest(".vthumb[data-yt]");
+  if(!a || !/^https?:$/.test(location.protocol)) return;
+  e.preventDefault();
+  const v = document.createElement("div");
+  v.className = "vthumb";
+  v.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&rel=0" title="Video de soldadura" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  a.replaceWith(v);
+});
+
+// Sección Videos: todas las miniaturas juntas
+document.getElementById("vgrid").innerHTML = TIPOS.map(t=>`<figure class="vitem">${vthumb(t)}<figcaption><strong>${t.sigla}</strong><span>${t.clase}</span></figcaption></figure>`).join("");
 
 function renderCard(t){
   return `<article class="card" id="${t.id}">
