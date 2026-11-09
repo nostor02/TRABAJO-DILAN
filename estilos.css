@@ -215,7 +215,7 @@ h3.sub{font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.
 .crono-det{margin-top:20px;border-left:3px solid #e8702a}
 .crono-det strong{display:block;font-size:1.05rem;margin-bottom:4px}
 .crono-det p{margin:0;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){.hero-svg *,.crono .barra{animation:none!important;transition:none!important}.hero-svg .sp{display:none}}
+@media (prefers-reduced-motion:reduce){.crono .barra{transition:none!important}}
 
 /* Miniaturas: respaldo, reproductor y galería */
 .vthumb{transition:box-shadow .25s,transform .25s}
