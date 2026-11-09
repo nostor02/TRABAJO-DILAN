@@ -287,3 +287,36 @@ alEntrar(cronoEl,()=>cronoEl.classList.add("on"));
   }
   requestAnimationFrame(frame);
 })();
+
+// Instrumentos: decodificador de electrodos revestidos
+const E3 = {"1":"Todas las posiciones","2":"Posición plana y horizontal","4":"Todas, incluida vertical descendente"};
+const E4 = {"0":"Celulósico, solo CC con electrodo positivo","1":"Celulósico, CA o CC con electrodo positivo","2":"Rutílico, CA o CC con electrodo negativo","3":"Rutílico, CA o CC","4":"Rutílico con polvo de hierro, CA o CC","5":"Bajo hidrógeno, CC con electrodo positivo","6":"Bajo hidrógeno, CA o CC con electrodo positivo","8":"Bajo hidrógeno con polvo de hierro, CA o CC con electrodo positivo"};
+const eCod = document.getElementById("eCod"), eOut = document.getElementById("eOut");
+function decodificar(){
+  const m = /^E(\d{2})(\d)(\d)$/i.exec(eCod.value.trim());
+  if(!m || !E3[m[2]] || !E4[m[3]]){ eOut.innerHTML = `<p class="empty">Código no reconocido. Prueba con E6011, E6013 o E7018.</p>`; return; }
+  eOut.innerHTML = [["E","Electrodo para soldadura por arco"],[m[1],`Resistencia mínima: ${m[1]}.000 psi (≈ ${Math.round(m[1]*6.895)} MPa)`],[m[2],E3[m[2]]],[m[3],E4[m[3]]]].map(([a,b])=>`<div class="parte"><span>${a}</span><p>${b}</p></div>`).join("");
+}
+document.getElementById("eEj").innerHTML = ["E6010","E6011","E6013","E7018"].map(c=>`<button class="ej" type="button">${c}</button>`).join("");
+document.getElementById("eEj").addEventListener("click",e=>{ if(e.target.classList.contains("ej")){ eCod.value = e.target.textContent; decodificar(); } });
+eCod.addEventListener("input",decodificar); decodificar();
+
+// Esquemas: defectos comunes
+const DEFECTOS = [
+  {n:"Porosidad", d:"Burbujas de gas atrapadas en el cordón.", c:"Poco gas, viento o pieza sucia.", s:"Limpia la pieza y revisa el caudal de gas.", x:'<circle class="df" cx="68" cy="42" r="3"/><circle class="df" cx="82" cy="38" r="2.5"/><circle class="df" cx="94" cy="43" r="3.2"/>'},
+  {n:"Socavación", d:"Surco en el metal base junto al cordón.", c:"Demasiado amperaje o arco muy largo.", s:"Baja la corriente y acorta el arco.", x:'<path class="df" d="M33 50h7l-3 8z"/><path class="df" d="M120 50h7l-3 8z"/>'},
+  {n:"Falta de fusión", d:"El cordón no llegó a unirse al metal base.", c:"Poco calor o avance muy rápido.", s:"Sube la corriente y avanza más despacio.", x:'<rect class="df" x="42" y="49" width="76" height="3"/>'},
+  {n:"Salpicaduras", d:"Gotas de metal pegadas alrededor del cordón.", c:"Arco largo o voltaje alto.", s:"Acorta el arco y ajusta los parámetros.", x:'<circle class="bd" cx="22" cy="47" r="2"/><circle class="bd" cx="14" cy="48" r="1.6"/><circle class="bd" cx="132" cy="46" r="2.4"/><circle class="bd" cx="144" cy="48" r="1.6"/>'},
+  {n:"Grietas", d:"Fisura en el cordón o en la zona afectada por el calor.", c:"Enfriamiento brusco o material duro.", s:"Precalienta y deja enfriar con calma.", x:'<polyline class="dk" points="80,29 75,37 83,43 78,50"/>'}
+];
+document.getElementById("defs").innerHTML = DEFECTOS.map(f=>`<article class="card def"><svg viewBox="0 0 160 90" role="img" aria-label="Corte de un cordón con ${f.n.toLowerCase()}"><rect class="pl" x="10" y="50" width="140" height="30"/><path class="bd" d="M40 50Q80 18 120 50z"/>${f.x}</svg><h3>${f.n}</h3><p>${f.d}</p><p><strong>Causa:</strong> ${f.c}</p><p><strong>Solución:</strong> ${f.s}</p></article>`).join("");
+
+// Seguridad: tono de careta según la corriente
+const cAmp = document.getElementById("cAmp");
+function careta(){
+  const a = +cAmp.value, n = a<60 ? 7 : a<=160 ? 8 : a<=250 ? 10 : 11;
+  document.getElementById("cV").textContent = a+" A";
+  document.getElementById("cN").textContent = "Tono "+n;
+  document.getElementById("cLente").style.setProperty("--oscuro",(0.55+n*0.035).toFixed(2));
+}
+cAmp.addEventListener("input",careta); careta();

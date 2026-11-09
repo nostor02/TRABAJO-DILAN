@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilos.css?v=3">
+<link rel="stylesheet" href="estilos.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -149,6 +149,11 @@
 <li>Amoladora, cepillo y lima para limpiar óxido, pintura y grasa.</li>
 <li>Escuadra, flexómetro y galga para alinear piezas y medir cordones.</li>
 <li>Prensas y soportes para fijar las piezas y evitar deformaciones.</li></ul></details>
+<h3 class="sub">Lee un electrodo revestido</h3>
+<div class="card"><p class="empty">Escribe un código o toca un ejemplo para ver qué significa cada parte.</p>
+<input id="eCod" class="buscar" value="E7018" maxlength="6" aria-label="Código del electrodo" style="max-width:180px;margin-bottom:12px">
+<div class="chips" id="eEj"></div>
+<div class="partes" id="eOut"></div></div>
 </section>
 
 <section id="esquemas">
@@ -162,6 +167,8 @@
 <button class="seg" data-e="llamas">Llamas</button>
 </div>
 <div class="card" id="esqBox"></div>
+<h3 class="sub">Defectos comunes en un cordón</h3>
+<div class="defs" id="defs"></div>
 </section>
 
 <section id="comparativa">
@@ -219,6 +226,10 @@
 <li><strong>Ropa:</strong> algodón grueso, lana o cuero. Evita sintéticos, que se derriten y se pegan a la piel.</li>
 <li><strong>Guantes y calzado:</strong> guantes de cuero largos y botas cerradas. Los pantalones van por fuera de la bota.</li>
 <li><strong>Respiración:</strong> respirador con filtro para humos en espacios cerrados o con metales recubiertos.</li></ul></div>
+<h3 class="sub">¿Qué tono de careta necesito?</h3>
+<div class="card careta"><div class="lente" id="cLente"><span id="cN"></span></div>
+<div><label class="campo">Corriente de soldadura: <strong id="cV"></strong><input type="range" id="cAmp" min="20" max="400" step="5" value="120"></label>
+<p class="empty" style="margin:12px 0 0">Referencia mínima para electrodo revestido (SMAW). Sigue siempre la norma y las indicaciones de tu instructor.</p></div></div>
 <h3 class="sub">Primeros auxilios básicos</h3>
 <details class="acordeon"><summary>Ojo de arco (lesión por radiación)</summary><p style="padding:0 4px 18px">Los síntomas, como ardor y sensación de arena en los ojos, aparecen unas horas después. No frotes los ojos. Aplica compresas frías y busca atención médica.</p></details>
 <details class="acordeon"><summary>Quemaduras</summary><p style="padding:0 4px 18px">Enfría con agua corriente fresca durante 10 a 20 minutos. No uses hielo ni revientes ampollas. Si la quemadura es grande o profunda, acude a urgencias.</p></details>
@@ -252,8 +263,8 @@
 
 </main>
 <footer>Proyecto de clase · Soldadura</footer>
-<script src="diagramas.js?v=3"></script>
-<script src="datos.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="diagramas.js?v=4"></script>
+<script src="datos.js?v=4"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

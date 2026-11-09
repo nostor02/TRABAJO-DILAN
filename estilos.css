@@ -235,3 +235,29 @@ h3.sub{font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.
 .vitem figcaption{display:flex;flex-direction:column;margin-top:10px;font-size:.88rem;color:var(--muted);line-height:1.4}
 .vitem figcaption strong{color:var(--text);font-size:.95rem}
 @media (prefers-reduced-motion:reduce){.vthumb,.vthumb img,.vthumb .play{transition:none!important}.vthumb:hover{transform:none}}
+
+/* Decodificador de electrodos */
+.chips button.ej{font:inherit;font-size:.88rem;border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--surface);color:var(--text);cursor:pointer;transition:border-color .2s}
+.chips button.ej:hover{border-color:#e8702a}
+.partes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:18px}
+.parte{border:1px solid var(--line);border-left:3px solid #e8702a;border-radius:6px;padding:12px 14px}
+.parte span{display:block;font-size:1.5rem;font-weight:500;line-height:1.2}
+.parte p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
+/* Defectos */
+.defs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.def{margin:0;padding:18px;transition:border-color .2s,transform .2s}
+.def:hover{border-color:#e8702a;transform:translateY(-2px)}
+.def svg{width:100%;height:auto;display:block;margin-bottom:10px}
+.def .pl{fill:var(--accent-soft);stroke:var(--text);stroke-width:1.2}
+.def .bd{fill:#e8702a}
+.def .df{fill:var(--surface)}
+.def .dk{fill:none;stroke:var(--warn);stroke-width:2}
+.def h3{font-size:1.02rem}
+.def p{font-size:.88rem;color:var(--muted);margin:0 0 6px}
+/* Careta */
+.careta{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.careta>div:last-child{flex:1;min-width:220px}
+.lente{--oscuro:.8;position:relative;width:170px;height:120px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 55%,#fff 0,#ffb366 12%,#e8702a 30%,#2d1d12 72%);flex:none}
+.lente::after{content:"";position:absolute;inset:0;background:rgba(5,6,8,var(--oscuro));transition:background .2s}
+.lente span{position:absolute;left:10px;bottom:8px;z-index:1;color:#fff;font-size:.82rem;font-weight:500}
+.campo input[type=range]{width:100%;accent-color:#e8702a;margin-top:6px}
