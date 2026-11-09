@@ -266,16 +266,24 @@ cronoEl.querySelectorAll(".barra").forEach(b=>{
 verCrono(0);
 alEntrar(cronoEl,()=>cronoEl.classList.add("on"));
 
-// Chispas del arco: se animan con SMIL dentro del propio SVG, sin depender del CSS ni de la configuración de movimiento del sistema
-document.querySelectorAll(".hero-svg .sp").forEach(c=>{
-  const dx = parseFloat(c.style.getPropertyValue("--dx")), dy = parseFloat(c.style.getPropertyValue("--dy"));
-  const begin = c.style.animationDelay || "0s", ns = "http://www.w3.org/2000/svg";
-  c.style.animation = "none";
-  const mov = document.createElementNS(ns,"animateTransform");
-  mov.setAttribute("attributeName","transform"); mov.setAttribute("type","translate");
-  mov.setAttribute("from","0 0"); mov.setAttribute("to",`${dx*1.2} ${dy+70}`);
-  mov.setAttribute("calcMode","spline"); mov.setAttribute("keyTimes","0;1"); mov.setAttribute("keySplines",".2 .6 .4 1");
-  const op = document.createElementNS(ns,"animate");
-  op.setAttribute("attributeName","opacity"); op.setAttribute("values","1;.9;0"); op.setAttribute("keyTimes","0;.7;1");
-  [mov,op].forEach(a=>{ a.setAttribute("dur","1.4s"); a.setAttribute("begin",begin); a.setAttribute("repeatCount","indefinite"); c.appendChild(a); });
-});
+// Chispas del arco: las anima JavaScript directamente, sin depender del CSS ni de la configuración de movimiento del sistema
+(function(){
+  const chispas = [...document.querySelectorAll(".hero-svg .sp")].map(c=>({
+    el:c,
+    dx:parseFloat(c.style.getPropertyValue("--dx")),
+    dy:parseFloat(c.style.getPropertyValue("--dy")),
+    delay:(parseFloat(c.style.animationDelay)||0)*1000
+  }));
+  chispas.forEach(s=>{ s.el.style.animation = "none"; });
+  const DUR = 1400;
+  function frame(t){
+    chispas.forEach(s=>{
+      const k = (((t-s.delay)%DUR)+DUR)%DUR/DUR;
+      const e = 1-Math.pow(1-k,2.2);
+      s.el.setAttribute("transform",`translate(${s.dx*1.2*e} ${(s.dy+70)*e})`);
+      s.el.style.opacity = k<.7 ? 1-.1*(k/.7) : .9*(1-(k-.7)/.3);
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
