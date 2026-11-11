@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilos.css?v=6">
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 <header class="top">
@@ -19,14 +19,12 @@
 <a href="#intro">Introducción</a>
 <a href="#clasificacion">Clasificación</a>
 <a href="#tipos">Tipos de soldadura</a>
-<a href="#videos">Videos</a>
 <a href="#instrumentos">Instrumentos</a>
 <a href="#esquemas">Esquemas</a>
-<a href="#defectos">Defectos</a>
 <a href="#comparativa">Comparativa</a>
 <a href="#seguridad">Seguridad</a>
 <a href="#glosario">Glosario</a>
-<h2>Filtrar tipos de soldadura</h2>
+<h2>Filtrar tipos</h2>
 <div id="filters"></div>
 <div class="tools"><button class="small" id="selAll">Todos</button><button class="small" id="selNone">Ninguno</button></div>
 </nav>
@@ -34,54 +32,9 @@
 <main>
 
 <section id="intro">
-<div class="hero">
-<div class="hero-txt">
-<span class="eyebrow">Guía de estudio · Procesos de soldadura</span>
-<h2>Unir metal es ciencia y también oficio</h2>
-<p>La soldadura une de forma permanente dos o más piezas, normalmente metálicas, mediante calor, presión o ambos, con o sin material de aporte. Bien hecha, la unión resiste tanto como las piezas que une.</p>
-<div class="hero-cta"><a class="btn" href="#tipos">Explorar los tipos</a><a class="btn ghost" href="#comparativa">¿Qué proceso me conviene?</a></div>
-</div>
-<div class="hero-img">
-<svg class="hero-svg" viewBox="0 0 420 340" role="img" aria-label="Ilustración de un arco de soldadura uniendo dos placas de metal, con chispas">
-<defs>
-<radialGradient id="hGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb366" stop-opacity=".85"/><stop offset=".4" stop-color="#e8702a" stop-opacity=".3"/><stop offset="1" stop-color="#e8702a" stop-opacity="0"/></radialGradient>
-<linearGradient id="hPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b95a5"/><stop offset=".5" stop-color="#5d6676"/><stop offset="1" stop-color="#363c47"/></linearGradient>
-<linearGradient id="hRod" x1="0" x2="1"><stop offset="0" stop-color="#9aa3b3"/><stop offset=".5" stop-color="#e3e8f0"/><stop offset="1" stop-color="#6b7383"/></linearGradient>
-<linearGradient id="hBead" x1="0" x2="1"><stop offset="0" stop-color="#e8702a"/><stop offset=".5" stop-color="#ffd19a"/><stop offset="1" stop-color="#e8702a"/></linearGradient>
-</defs>
-<circle class="glow" cx="210" cy="240" r="160" fill="url(#hGlow)"/>
-<rect x="20" y="252" width="182" height="52" rx="3" fill="url(#hPlate)"/>
-<rect x="218" y="252" width="182" height="52" rx="3" fill="url(#hPlate)"/>
-<rect x="20" y="252" width="182" height="3" fill="#b9c2d0" opacity=".5"/>
-<rect x="218" y="252" width="182" height="3" fill="#b9c2d0" opacity=".5"/>
-<rect x="196" y="246" width="28" height="58" rx="4" fill="url(#hBead)"/>
-<g transform="rotate(28.2 300 70)"><rect x="288" y="8" width="24" height="64" rx="4" fill="#252a32"/><rect x="288" y="22" width="24" height="6" fill="#e8702a"/></g>
-<line x1="300" y1="70" x2="212" y2="232" stroke="url(#hRod)" stroke-width="7" stroke-linecap="round"/>
-<circle class="core" cx="210" cy="238" r="16" fill="#ffe2bd" opacity=".55"/>
-<circle cx="210" cy="238" r="8" fill="#fff"/>
-<g aria-hidden="true">
-<circle class="sp" cx="210" cy="234" r="2.2" style="--dx:-110px;--dy:-70px;animation-delay:0s"/>
-<circle class="sp" cx="210" cy="234" r="1.8" style="--dx:-70px;--dy:-110px;animation-delay:.25s"/>
-<circle class="sp" cx="210" cy="234" r="2.4" style="--dx:-30px;--dy:-130px;animation-delay:.5s"/>
-<circle class="sp" cx="210" cy="234" r="1.8" style="--dx:40px;--dy:-120px;animation-delay:.12s"/>
-<circle class="sp" cx="210" cy="234" r="2.2" style="--dx:90px;--dy:-90px;animation-delay:.38s"/>
-<circle class="sp" cx="210" cy="234" r="2" style="--dx:130px;--dy:-50px;animation-delay:.62s"/>
-<circle class="sp" cx="210" cy="234" r="1.6" style="--dx:-140px;--dy:-30px;animation-delay:.75s"/>
-<circle class="sp" cx="210" cy="234" r="2" style="--dx:150px;--dy:-80px;animation-delay:.9s"/>
-<circle class="sp" cx="210" cy="234" r="1.6" style="--dx:-90px;--dy:-140px;animation-delay:1.05s"/>
-<circle class="sp" cx="210" cy="234" r="2.2" style="--dx:70px;--dy:-150px;animation-delay:.18s"/>
-<circle class="sp" cx="210" cy="234" r="1.8" style="--dx:20px;--dy:-100px;animation-delay:.82s"/>
-<circle class="sp" cx="210" cy="234" r="1.8" style="--dx:-50px;--dy:-80px;animation-delay:1.2s"/>
-</g>
-</svg>
-</div>
-</div>
-<div class="stats">
-<div class="stat"><span class="num" id="nTipos" data-n="10">10</span>tipos de soldadura</div>
-<div class="stat"><span class="num" data-n="5">5</span>formas de clasificarlas</div>
-<div class="stat"><span class="num" data-n="200" data-pre="+">+200</span>años desde el arco eléctrico</div>
-<div class="stat"><span class="num" data-n="6">6</span>puntos de seguridad antes de soldar</div>
-</div>
+<h2 class="sec">Introducción</h2>
+<p class="lead">La soldadura une de forma permanente dos o más piezas, normalmente metálicas, mediante calor, presión o ambos, con o sin material de aporte. Bien hecha, la unión resiste tanto como las piezas que une.</p>
+<div class="equipo"><span>Integrantes</span><ul><li>Dilan Villa</li><li>Samuel Ibarra</li><li>Camila Martínez</li></ul></div>
 <h3 class="sub">Qué necesita toda soldadura</h3>
 <div class="tri">
 <div class="card"><h3>1. Fuente de energía</h3><p>Calienta el metal hasta fundirlo o ablandarlo: arco eléctrico, llama, corriente por resistencia, láser o fricción.</p></div>
@@ -89,9 +42,16 @@
 <div class="card"><h3>3. Material de aporte</h3><p>Electrodo, alambre o varilla que rellena la unión. Algunos procesos no lo usan, como la resistencia por puntos o la fricción-agitación.</p></div>
 </div>
 <h3 class="sub">Cronología</h3>
-<p class="empty" style="margin-bottom:16px">Pasa el cursor o toca cada barra para ver qué ocurrió.</p>
-<div class="wrap"><div class="crono" id="crono" role="group" aria-label="Cronología de la soldadura"></div></div>
-<div class="card crono-det" id="cronoDet" aria-live="polite"></div>
+<ul class="timeline">
+<li><span>~1800</span>Humphry Davy demuestra el arco eléctrico, base de toda la soldadura por arco.</li>
+<li><span>1881</span>Auguste de Méritens une placas de plomo con un arco de carbón. En 1885 Benardos y Olszewski patentan el proceso.</li>
+<li><span>1903</span>Fouché y Picard desarrollan el soplete oxiacetilénico.</li>
+<li><span>1904</span>Oscar Kjellberg inventa el electrodo revestido.</li>
+<li><span>1930s</span>Aparece el arco sumergido (SAW) para fabricar piezas grandes y gruesas.</li>
+<li><span>1941</span>Se desarrolla el TIG para soldar aluminio y magnesio en la industria aeronáutica.</li>
+<li><span>1948</span>Nace el MIG, con alambre continuo y gas protector.</li>
+<li><span>1991</span>El instituto TWI (Reino Unido) inventa la fricción-agitación.</li>
+</ul>
 <p class="empty">Las fechas son aproximadas y pueden variar según la fuente.</p>
 <h3 class="sub">Dónde se usa</h3>
 <div class="chips"><span>Automotriz</span><span>Naval</span><span>Construcción y puentes</span><span>Oleoductos y gasoductos</span><span>Aeroespacial</span><span>Electrónica</span><span>Energía</span><span>Maquinaria</span></div>
@@ -116,12 +76,6 @@
 <p>Busca por nombre, sigla o uso, o marca tipos en el menú lateral. Cada tarjeta trae su diagrama, ventajas, desventajas y seguridad.</p>
 <input type="search" id="buscar" class="buscar" placeholder="Buscar: MIG, láser, aluminio…" aria-label="Buscar tipo de soldadura">
 <div id="cards"></div>
-</section>
-
-<section id="videos">
-<h2 class="sec">Videos</h2>
-<p>Un video por cada proceso. Toca la miniatura para verlo.</p>
-<div class="vgrid" id="vgrid"></div>
 </section>
 
 <section id="instrumentos">
@@ -150,11 +104,6 @@
 <li>Amoladora, cepillo y lima para limpiar óxido, pintura y grasa.</li>
 <li>Escuadra, flexómetro y galga para alinear piezas y medir cordones.</li>
 <li>Prensas y soportes para fijar las piezas y evitar deformaciones.</li></ul></details>
-<h3 class="sub">Lee un electrodo revestido</h3>
-<div class="card"><p class="empty">Escribe un código o toca un ejemplo para ver qué significa cada parte.</p>
-<input id="eCod" class="buscar" value="E7018" maxlength="6" aria-label="Código del electrodo" style="max-width:180px;margin-bottom:12px">
-<div class="chips" id="eEj"></div>
-<div class="partes" id="eOut"></div></div>
 </section>
 
 <section id="esquemas">
@@ -170,12 +119,6 @@
 <div class="card" id="esqBox"></div>
 </section>
 
-<section id="defectos">
-<h2 class="sec">Defectos comunes</h2>
-<p>Así se ve el corte de un cordón con cada defecto y qué hacer para evitarlo.</p>
-<div class="defs" id="defs"></div>
-</section>
-
 <section id="comparativa">
 <h2 class="sec">Comparativa</h2>
 <div class="card">
@@ -187,16 +130,6 @@
 </div>
 <p class="sugerencia" id="sugerencia"></p>
 </div>
-<h3 class="sub">Mapa de procesos</h3>
-<p class="empty" style="margin-bottom:16px">Cada punto es un proceso. Cuanto más arriba y a la derecha, mejor en lo que mides. Cambia los ejes para compararlos de otra forma.</p>
-<div class="card mapa">
-<div class="mapa-ctl"><label class="campo">Eje horizontal<select id="mX"></select></label><label class="campo">Eje vertical<select id="mY"></select></label></div>
-<div class="wrap"><svg id="mapaSvg" viewBox="0 0 640 400" role="img" aria-label="Mapa que ubica cada proceso de soldadura según dos criterios a elección"></svg></div>
-<p class="mapa-det" id="mapaDet" aria-live="polite">Pasa el cursor o toca un punto para ver sus valores.</p>
-</div>
-<h3 class="sub">Clasificación general</h3>
-<div class="card" id="rank"></div>
-<p class="empty" style="margin:-4px 0 28px">Puntajes de 1 a 5 (5 es mejor) tomados de la tabla de abajo. Miden velocidad, facilidad de uso y costo del equipo; no miden la calidad ni la precisión de la unión, por eso TIG queda abajo aunque da de las soldaduras más limpias.</p>
 <div class="wrap"><table>
 <thead><tr><th>Proceso</th><th>Protección</th><th>Dificultad</th><th>Velocidad</th><th>Costo del equipo</th><th>Uso típico</th></tr></thead>
 <tbody>
@@ -241,10 +174,6 @@
 <li><strong>Ropa:</strong> algodón grueso, lana o cuero. Evita sintéticos, que se derriten y se pegan a la piel.</li>
 <li><strong>Guantes y calzado:</strong> guantes de cuero largos y botas cerradas. Los pantalones van por fuera de la bota.</li>
 <li><strong>Respiración:</strong> respirador con filtro para humos en espacios cerrados o con metales recubiertos.</li></ul></div>
-<h3 class="sub">¿Qué tono de careta necesito?</h3>
-<div class="card careta"><div class="lente" id="cLente"><span id="cN"></span></div>
-<div><label class="campo">Corriente de soldadura: <strong id="cV"></strong><input type="range" id="cAmp" min="20" max="400" step="5" value="120"></label>
-<p class="empty" style="margin:12px 0 0">Referencia mínima para electrodo revestido (SMAW). Sigue siempre la norma y las indicaciones de tu instructor.</p></div></div>
 <h3 class="sub">Primeros auxilios básicos</h3>
 <details class="acordeon"><summary>Ojo de arco (lesión por radiación)</summary><p style="padding:0 4px 18px">Los síntomas, como ardor y sensación de arena en los ojos, aparecen unas horas después. No frotes los ojos. Aplica compresas frías y busca atención médica.</p></details>
 <details class="acordeon"><summary>Quemaduras</summary><p style="padding:0 4px 18px">Enfría con agua corriente fresca durante 10 a 20 minutos. No uses hielo ni revientes ampollas. Si la quemadura es grande o profunda, acude a urgencias.</p></details>
@@ -277,9 +206,9 @@
 </section>
 
 </main>
-<footer>Proyecto de clase · Soldadura</footer>
-<script src="diagramas.js?v=6"></script>
-<script src="datos.js?v=6"></script>
-<script src="app.js?v=6"></script>
+<footer>Proyecto de clase · Soldadura<br>Dilan Villa · Samuel Ibarra · Camila Martínez</footer>
+<script src="diagramas.js"></script>
+<script src="datos.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
